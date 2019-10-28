@@ -144,26 +144,156 @@ namespace SpecifyPrepAdd
             }
         }
 
-        private int GetCollectionObjectID(string guid)
+        private int GetCollectionObjectID(string identifier)
         {
             try
             {
                 using(MySqlConnection conn = GetMySqlConnection())
                 {
-                    string sql = @"SELECT CollectionObjectID FROM collectionobject WHERE GUID LIKE @guid";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.Add("@guid", MySqlDbType.VarChar);
-                    cmd.Parameters["@guid"].Value = guid;
-                    conn.Open();
-                    int collectionObjectID = (int)cmd.ExecuteScalar();
-                    conn.Close();
-                    return collectionObjectID;
+                    if (byCatNumButton.Checked)
+                    {
+                        string catNumSQL = @"SELECT CollectionObjectID FROM collectionobject 
+                            INNER JOIN collection USING(CollectionID) 
+                            WHERE collectionobject.CatalogNumber = LPAD(@CatNum, 9, '0')
+                            AND collection.CollectionName = @CollName";
+                        MySqlCommand cmd = new MySqlCommand(catNumSQL, conn);
+                        cmd.Parameters.Add("@CatNum", MySqlDbType.String);
+                        cmd.Parameters.Add("@CollName", MySqlDbType.String);
+                        cmd.Parameters["@CatNum"].Value = identifier;
+                        cmd.Parameters["@CollName"].Value = collectionComboBox.Text;
+                        conn.Open();
+                        int CollectionObjectID = (int)cmd.ExecuteScalar();
+                        conn.Close();
+                        return CollectionObjectID;
+                    }
+                    else if (byGUIDButton.Checked)
+                    {
+                        string GUIDsql = @"SELECT CollectionObjectID FROM collectionobject WHERE GUID LIKE @guid";
+                        MySqlCommand cmd = new MySqlCommand(GUIDsql, conn);
+                        cmd.Parameters.Add("@guid", MySqlDbType.VarChar);
+                        cmd.Parameters["@guid"].Value = identifier;
+                        conn.Open();
+                        int collectionObjectID = (int)cmd.ExecuteScalar();
+                        conn.Close();
+                        return collectionObjectID;
+                    }
+                    return 0;
                 }
             }
             catch(Exception exc)
             {
                 messageBox.AppendText(exc.ToString() + "\n");
                 return 0;
+            }
+        }
+
+        private string GetPrepGUID(long prepID)
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    string sql = @"SELECT GUID FROM preparation WHERE preparationID = @prepID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add("@prepID", MySqlDbType.Int64);
+                    cmd.Parameters["@prepID"].Value = prepID;
+                    conn.Open();
+                    string prepGUID = (string)cmd.ExecuteScalar();
+                    return prepGUID;
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
+            }
+        }
+
+        private void AddPreps()
+        {
+            int count = 0;
+            try
+            {
+                DataSet prepTypes = GetTableDataSet("preptype");
+                var pts = (from DataRow preprow in prepTypes.Tables["preptype"].AsEnumerable()
+                           where (string)preprow["Name"] == PrepTypeCombobox.Text
+                           select preprow);
+                int prepTypeID = (int)pts.First()["PrepTypeID"];
+                DataSet collections = GetTableDataSet("collection");
+                var coll = (from DataRow collrow in collections.Tables["collection"].AsEnumerable()
+                            where (string)collrow["CollectionName"] == collectionComboBox.Text
+                            select collrow);
+                int collectionID = (int)coll.First()["CollectionID"];
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    exportCSVButton.Visible = true;
+                    DataGridViewColumn newColl = new DataGridViewColumn(CSVDataGrid.Rows[0].Cells[0]);
+                    newColl.Name = "Inserted Prep GUID";
+                    newColl.HeaderText = "Inserted Prep GUID";
+                    CSVDataGrid.Columns.Add(newColl);
+                    foreach (DataGridViewRow row in CSVDataGrid.Rows)
+                    {
+                        if (row.Cells[0].Value != null || row.Cells[0].Value != DBNull.Value || !String.IsNullOrWhiteSpace(row.Cells[0].Value.ToString()))
+                        {
+                            int collectionObjectID = GetCollectionObjectID(row.Cells[0].Value.ToString());
+                            string sql = @"INSERT INTO preparation (TimestampCreated, 
+                                                            Version, 
+                                                            CollectionMemberID, 
+                                                            CountAmt,
+                                                            CollectionObjectID, 
+                                                            CreatedByAgentID, 
+                                                            PrepTypeID, 
+                                                            GUID)
+                                SELECT NOW(), 1, @CollectionID, 1, @CollectionObjectID, 1, @PrepTypeID, UUID()";
+                            MySqlCommand cmd = new MySqlCommand(sql, conn);
+                            cmd.Parameters.Add("@CollectionID", MySqlDbType.Int32);
+                            cmd.Parameters.Add("@CollectionObjectID", MySqlDbType.Int32);
+                            cmd.Parameters.Add("@PrepTypeID", MySqlDbType.Int32);
+                            cmd.Parameters["@CollectionID"].Value = collectionID;
+                            cmd.Parameters["@CollectionObjectID"].Value = collectionObjectID;
+                            cmd.Parameters["@PrepTypeID"].Value = prepTypeID;
+                            conn.Open();
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            conn.Close();
+                            if (rowsAffected > 0)
+                            {
+                                count += rowsAffected;
+                                long prepID = cmd.LastInsertedId;
+                                string prepGUID = GetPrepGUID(prepID);
+                                row.Cells[CSVDataGrid.Columns["Inserted Prep GUID"].Index].Value = prepGUID;
+                            }
+                        }
+                    }
+                }
+                MessageBox.Show(String.Format("{0} preps inserted", count));
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                MessageBox.Show(String.Format("{0} preps inserted", count));
+            }
+        }
+
+        private string getCSVText()
+        {
+            try
+            {
+                var sb = new StringBuilder();
+
+                var headers = CSVDataGrid.Columns.Cast<DataGridViewColumn>();
+                sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
+
+                foreach (DataGridViewRow row in CSVDataGrid.Rows)
+                {
+                    var cells = row.Cells.Cast<DataGridViewCell>();
+                    sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
+                }
+                return sb.ToString();
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
             }
         }
 
@@ -223,59 +353,27 @@ namespace SpecifyPrepAdd
 
         private void addPrepsButton_Click(object sender, EventArgs e)
         {
-            int count = 0;
-            try
+            if (importImagesRadioButton.Checked)
             {
-                DataSet prepTypes = GetTableDataSet("preptype");
-                var pts = (from DataRow preprow in prepTypes.Tables["preptype"].AsEnumerable()
-                           where (string)preprow["Name"] == PrepTypeCombobox.Text
-                           select preprow);
-                int prepTypeID = (int)pts.First()["PrepTypeID"];
-                DataSet collections = GetTableDataSet("collection");
-                var coll = (from DataRow collrow in collections.Tables["collection"].AsEnumerable()
-                            where (string)collrow["CollectionName"] == collectionComboBox.Text
-                            select collrow);
-                int collectionID = (int)coll.First()["CollectionID"];
-                using (MySqlConnection conn = GetMySqlConnection())
-                {
-                    foreach (DataGridViewRow row in CSVDataGrid.Rows)
-                    {
-                        if (row.Cells[0].Value != null || row.Cells[0].Value != DBNull.Value || !String.IsNullOrWhiteSpace(row.Cells[0].Value.ToString()))
-                        {
-                            int collectionObjectID = GetCollectionObjectID(row.Cells[0].Value.ToString());
-                            string sql = @"INSERT INTO preparation (TimestampCreated, 
-                                                            Version, 
-                                                            CollectionMemberID, 
-                                                            CountAmt,
-                                                            CollectionObjectID, 
-                                                            CreatedByAgentID, 
-                                                            PrepTypeID, 
-                                                            GUID)
-                                SELECT NOW(), 1, @CollectionID, 1, @CollectionObjectID, 1, @PrepTypeID, UUID()";
-                            MySqlCommand cmd = new MySqlCommand(sql, conn);
-                            cmd.Parameters.Add("@CollectionID", MySqlDbType.Int32);
-                            cmd.Parameters.Add("@CollectionObjectID", MySqlDbType.Int32);
-                            cmd.Parameters.Add("@PrepTypeID", MySqlDbType.Int32);
-                            cmd.Parameters["@CollectionID"].Value = collectionID;
-                            cmd.Parameters["@CollectionObjectID"].Value = collectionObjectID;
-                            cmd.Parameters["@PrepTypeID"].Value = prepTypeID;
-                            conn.Open();
-                            int rowsAffected = cmd.ExecuteNonQuery();
-                            conn.Close();
-                            if (rowsAffected > 0)
-                            {
-                                count += rowsAffected;
-                            }
-                        }
-                    }
-                }
-                MessageBox.Show(String.Format("{0} preps inserted", count));
+                AddPreps();
+
             }
-            catch (Exception exc)
+            else
             {
-                messageBox.AppendText(exc.ToString() + "\n");
-                MessageBox.Show(String.Format("{0} preps inserted", count));
+                AddPreps();
             }
+        }
+
+        private void exportCSVButton_Click(object sender, EventArgs e)
+        {
+            exportCSVDialog.ShowDialog();
+        }
+
+        private void exportCSVDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            string csvText = getCSVText();
+            string filename = exportCSVDialog.FileName;
+            File.WriteAllText(filename, csvText);
         }
     }
 }

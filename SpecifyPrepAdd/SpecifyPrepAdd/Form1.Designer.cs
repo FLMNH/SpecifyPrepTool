@@ -50,9 +50,19 @@
             this.collectionLabel = new System.Windows.Forms.Label();
             this.collectionComboBox = new System.Windows.Forms.ComboBox();
             this.connectButton = new System.Windows.Forms.Button();
+            this.prepsOnlyRadioButton = new System.Windows.Forms.RadioButton();
+            this.importImagesRadioButton = new System.Windows.Forms.RadioButton();
+            this.actionBox = new System.Windows.Forms.GroupBox();
+            this.identifierBox = new System.Windows.Forms.GroupBox();
+            this.byCatNumButton = new System.Windows.Forms.RadioButton();
+            this.byGUIDButton = new System.Windows.Forms.RadioButton();
+            this.exportCSVButton = new System.Windows.Forms.Button();
+            this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
+            this.actionBox.SuspendLayout();
+            this.identifierBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // MySQLUser
@@ -254,11 +264,93 @@
             this.connectButton.UseVisualStyleBackColor = true;
             this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
+            // prepsOnlyRadioButton
+            // 
+            this.prepsOnlyRadioButton.AutoSize = true;
+            this.prepsOnlyRadioButton.Checked = true;
+            this.prepsOnlyRadioButton.Location = new System.Drawing.Point(6, 18);
+            this.prepsOnlyRadioButton.Name = "prepsOnlyRadioButton";
+            this.prepsOnlyRadioButton.Size = new System.Drawing.Size(110, 17);
+            this.prepsOnlyRadioButton.TabIndex = 21;
+            this.prepsOnlyRadioButton.TabStop = true;
+            this.prepsOnlyRadioButton.Text = "Create Preps Only";
+            this.prepsOnlyRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // importImagesRadioButton
+            // 
+            this.importImagesRadioButton.AutoSize = true;
+            this.importImagesRadioButton.Location = new System.Drawing.Point(122, 18);
+            this.importImagesRadioButton.Name = "importImagesRadioButton";
+            this.importImagesRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.importImagesRadioButton.TabIndex = 22;
+            this.importImagesRadioButton.Text = "Also Populate External";
+            this.importImagesRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // actionBox
+            // 
+            this.actionBox.Controls.Add(this.importImagesRadioButton);
+            this.actionBox.Controls.Add(this.prepsOnlyRadioButton);
+            this.actionBox.Location = new System.Drawing.Point(47, 195);
+            this.actionBox.Name = "actionBox";
+            this.actionBox.Size = new System.Drawing.Size(281, 41);
+            this.actionBox.TabIndex = 23;
+            this.actionBox.TabStop = false;
+            // 
+            // identifierBox
+            // 
+            this.identifierBox.Controls.Add(this.byCatNumButton);
+            this.identifierBox.Controls.Add(this.byGUIDButton);
+            this.identifierBox.Location = new System.Drawing.Point(47, 153);
+            this.identifierBox.Name = "identifierBox";
+            this.identifierBox.Size = new System.Drawing.Size(281, 41);
+            this.identifierBox.TabIndex = 24;
+            this.identifierBox.TabStop = false;
+            // 
+            // byCatNumButton
+            // 
+            this.byCatNumButton.AutoSize = true;
+            this.byCatNumButton.Checked = true;
+            this.byCatNumButton.Location = new System.Drawing.Point(6, 16);
+            this.byCatNumButton.Name = "byCatNumButton";
+            this.byCatNumButton.Size = new System.Drawing.Size(116, 17);
+            this.byCatNumButton.TabIndex = 22;
+            this.byCatNumButton.TabStop = true;
+            this.byCatNumButton.Text = "By Catalog Number";
+            this.byCatNumButton.UseVisualStyleBackColor = true;
+            // 
+            // byGUIDButton
+            // 
+            this.byGUIDButton.AutoSize = true;
+            this.byGUIDButton.Location = new System.Drawing.Point(128, 16);
+            this.byGUIDButton.Name = "byGUIDButton";
+            this.byGUIDButton.Size = new System.Drawing.Size(67, 17);
+            this.byGUIDButton.TabIndex = 21;
+            this.byGUIDButton.Text = "By GUID";
+            this.byGUIDButton.UseVisualStyleBackColor = true;
+            // 
+            // exportCSVButton
+            // 
+            this.exportCSVButton.Location = new System.Drawing.Point(409, 213);
+            this.exportCSVButton.Name = "exportCSVButton";
+            this.exportCSVButton.Size = new System.Drawing.Size(138, 23);
+            this.exportCSVButton.TabIndex = 25;
+            this.exportCSVButton.Text = "Export CSV";
+            this.exportCSVButton.UseVisualStyleBackColor = true;
+            this.exportCSVButton.Visible = false;
+            this.exportCSVButton.Click += new System.EventHandler(this.exportCSVButton_Click);
+            // 
+            // exportCSVDialog
+            // 
+            this.exportCSVDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportCSVDialog_FileOk);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 900);
+            this.Controls.Add(this.exportCSVButton);
+            this.Controls.Add(this.identifierBox);
+            this.Controls.Add(this.actionBox);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.collectionBox);
             this.Controls.Add(this.PrepTypeBox);
@@ -281,6 +373,10 @@
             this.PrepTypeBox.PerformLayout();
             this.collectionBox.ResumeLayout(false);
             this.collectionBox.PerformLayout();
+            this.actionBox.ResumeLayout(false);
+            this.actionBox.PerformLayout();
+            this.identifierBox.ResumeLayout(false);
+            this.identifierBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,6 +406,14 @@
         private System.Windows.Forms.ComboBox collectionComboBox;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button addPrepsButton;
+        private System.Windows.Forms.RadioButton prepsOnlyRadioButton;
+        private System.Windows.Forms.RadioButton importImagesRadioButton;
+        private System.Windows.Forms.GroupBox actionBox;
+        private System.Windows.Forms.GroupBox identifierBox;
+        private System.Windows.Forms.RadioButton byCatNumButton;
+        private System.Windows.Forms.RadioButton byGUIDButton;
+        private System.Windows.Forms.Button exportCSVButton;
+        private System.Windows.Forms.SaveFileDialog exportCSVDialog;
     }
 }
 
