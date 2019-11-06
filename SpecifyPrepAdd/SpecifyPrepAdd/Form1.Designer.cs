@@ -51,18 +51,26 @@
             this.collectionComboBox = new System.Windows.Forms.ComboBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.prepsOnlyRadioButton = new System.Windows.Forms.RadioButton();
-            this.importImagesRadioButton = new System.Windows.Forms.RadioButton();
+            this.externalRadioButton = new System.Windows.Forms.RadioButton();
             this.actionBox = new System.Windows.Forms.GroupBox();
             this.identifierBox = new System.Windows.Forms.GroupBox();
             this.byCatNumButton = new System.Windows.Forms.RadioButton();
             this.byGUIDButton = new System.Windows.Forms.RadioButton();
             this.exportCSVButton = new System.Windows.Forms.Button();
             this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
+            this.externalColumnBox = new System.Windows.Forms.GroupBox();
+            this.externalColumnLabel = new System.Windows.Forms.Label();
+            this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
+            this.externalTableLabel = new System.Windows.Forms.Label();
+            this.externalTableComboBox = new System.Windows.Forms.ComboBox();
+            this.externalBoolLabel = new System.Windows.Forms.Label();
+            this.externalBoolComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
             this.actionBox.SuspendLayout();
             this.identifierBox.SuspendLayout();
+            this.externalColumnBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // MySQLUser
@@ -74,14 +82,14 @@
             // 
             // MySQLHost
             // 
-            this.MySQLHost.Location = new System.Drawing.Point(47, 127);
+            this.MySQLHost.Location = new System.Drawing.Point(47, 86);
             this.MySQLHost.Name = "MySQLHost";
             this.MySQLHost.Size = new System.Drawing.Size(226, 20);
             this.MySQLHost.TabIndex = 2;
             // 
             // MySQLDb
             // 
-            this.MySQLDb.Location = new System.Drawing.Point(321, 127);
+            this.MySQLDb.Location = new System.Drawing.Point(321, 86);
             this.MySQLDb.Name = "MySQLDb";
             this.MySQLDb.Size = new System.Drawing.Size(226, 20);
             this.MySQLDb.TabIndex = 3;
@@ -92,7 +100,7 @@
             this.messageBox.Multiline = true;
             this.messageBox.Name = "messageBox";
             this.messageBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageBox.Size = new System.Drawing.Size(596, 386);
+            this.messageBox.Size = new System.Drawing.Size(596, 424);
             this.messageBox.TabIndex = 4;
             // 
             // MySQLPasswordLabel
@@ -116,7 +124,7 @@
             // MySQLHostLabel
             // 
             this.MySQLHostLabel.AutoSize = true;
-            this.MySQLHostLabel.Location = new System.Drawing.Point(44, 111);
+            this.MySQLHostLabel.Location = new System.Drawing.Point(44, 70);
             this.MySQLHostLabel.Name = "MySQLHostLabel";
             this.MySQLHostLabel.Size = new System.Drawing.Size(67, 13);
             this.MySQLHostLabel.TabIndex = 7;
@@ -125,7 +133,7 @@
             // MySQLDBLabel
             // 
             this.MySQLDBLabel.AutoSize = true;
-            this.MySQLDBLabel.Location = new System.Drawing.Point(318, 111);
+            this.MySQLDBLabel.Location = new System.Drawing.Point(318, 70);
             this.MySQLDBLabel.Name = "MySQLDBLabel";
             this.MySQLDBLabel.Size = new System.Drawing.Size(91, 13);
             this.MySQLDBLabel.TabIndex = 8;
@@ -186,7 +194,7 @@
             // CSVDataGrid
             // 
             this.CSVDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CSVDataGrid.Location = new System.Drawing.Point(47, 430);
+            this.CSVDataGrid.Location = new System.Drawing.Point(47, 468);
             this.CSVDataGrid.Name = "CSVDataGrid";
             this.CSVDataGrid.Size = new System.Drawing.Size(1136, 513);
             this.CSVDataGrid.TabIndex = 15;
@@ -208,7 +216,7 @@
             this.PrepTypeBox.Controls.Add(this.CSVFileLabel);
             this.PrepTypeBox.Controls.Add(this.PrepTypeLabel);
             this.PrepTypeBox.Controls.Add(this.PrepTypeCombobox);
-            this.PrepTypeBox.Location = new System.Drawing.Point(47, 312);
+            this.PrepTypeBox.Location = new System.Drawing.Point(47, 350);
             this.PrepTypeBox.Name = "PrepTypeBox";
             this.PrepTypeBox.Size = new System.Drawing.Size(534, 112);
             this.PrepTypeBox.TabIndex = 18;
@@ -229,7 +237,7 @@
             // 
             this.collectionBox.Controls.Add(this.collectionLabel);
             this.collectionBox.Controls.Add(this.collectionComboBox);
-            this.collectionBox.Location = new System.Drawing.Point(47, 242);
+            this.collectionBox.Location = new System.Drawing.Point(47, 280);
             this.collectionBox.Name = "collectionBox";
             this.collectionBox.Size = new System.Drawing.Size(534, 64);
             this.collectionBox.TabIndex = 19;
@@ -256,7 +264,7 @@
             // 
             // connectButton
             // 
-            this.connectButton.Location = new System.Drawing.Point(409, 166);
+            this.connectButton.Location = new System.Drawing.Point(415, 129);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(138, 23);
             this.connectButton.TabIndex = 20;
@@ -275,22 +283,24 @@
             this.prepsOnlyRadioButton.TabStop = true;
             this.prepsOnlyRadioButton.Text = "Create Preps Only";
             this.prepsOnlyRadioButton.UseVisualStyleBackColor = true;
+            this.prepsOnlyRadioButton.CheckedChanged += new System.EventHandler(this.prepsOnlyRadioButton_CheckedChanged);
             // 
-            // importImagesRadioButton
+            // externalRadioButton
             // 
-            this.importImagesRadioButton.AutoSize = true;
-            this.importImagesRadioButton.Location = new System.Drawing.Point(122, 18);
-            this.importImagesRadioButton.Name = "importImagesRadioButton";
-            this.importImagesRadioButton.Size = new System.Drawing.Size(131, 17);
-            this.importImagesRadioButton.TabIndex = 22;
-            this.importImagesRadioButton.Text = "Also Populate External";
-            this.importImagesRadioButton.UseVisualStyleBackColor = true;
+            this.externalRadioButton.AutoSize = true;
+            this.externalRadioButton.Location = new System.Drawing.Point(122, 18);
+            this.externalRadioButton.Name = "externalRadioButton";
+            this.externalRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.externalRadioButton.TabIndex = 22;
+            this.externalRadioButton.Text = "Also Populate External";
+            this.externalRadioButton.UseVisualStyleBackColor = true;
+            this.externalRadioButton.CheckedChanged += new System.EventHandler(this.externalRadioButton_CheckedChanged);
             // 
             // actionBox
             // 
-            this.actionBox.Controls.Add(this.importImagesRadioButton);
+            this.actionBox.Controls.Add(this.externalRadioButton);
             this.actionBox.Controls.Add(this.prepsOnlyRadioButton);
-            this.actionBox.Location = new System.Drawing.Point(47, 195);
+            this.actionBox.Location = new System.Drawing.Point(47, 163);
             this.actionBox.Name = "actionBox";
             this.actionBox.Size = new System.Drawing.Size(281, 41);
             this.actionBox.TabIndex = 23;
@@ -300,7 +310,7 @@
             // 
             this.identifierBox.Controls.Add(this.byCatNumButton);
             this.identifierBox.Controls.Add(this.byGUIDButton);
-            this.identifierBox.Location = new System.Drawing.Point(47, 153);
+            this.identifierBox.Location = new System.Drawing.Point(47, 119);
             this.identifierBox.Name = "identifierBox";
             this.identifierBox.Size = new System.Drawing.Size(281, 41);
             this.identifierBox.TabIndex = 24;
@@ -330,7 +340,7 @@
             // 
             // exportCSVButton
             // 
-            this.exportCSVButton.Location = new System.Drawing.Point(409, 213);
+            this.exportCSVButton.Location = new System.Drawing.Point(415, 176);
             this.exportCSVButton.Name = "exportCSVButton";
             this.exportCSVButton.Size = new System.Drawing.Size(138, 23);
             this.exportCSVButton.TabIndex = 25;
@@ -343,11 +353,79 @@
             // 
             this.exportCSVDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.exportCSVDialog_FileOk);
             // 
+            // externalColumnBox
+            // 
+            this.externalColumnBox.Controls.Add(this.externalBoolLabel);
+            this.externalColumnBox.Controls.Add(this.externalBoolComboBox);
+            this.externalColumnBox.Controls.Add(this.externalTableLabel);
+            this.externalColumnBox.Controls.Add(this.externalTableComboBox);
+            this.externalColumnBox.Controls.Add(this.externalColumnLabel);
+            this.externalColumnBox.Controls.Add(this.externalColumnComboBox);
+            this.externalColumnBox.Location = new System.Drawing.Point(47, 207);
+            this.externalColumnBox.Name = "externalColumnBox";
+            this.externalColumnBox.Size = new System.Drawing.Size(534, 67);
+            this.externalColumnBox.TabIndex = 26;
+            this.externalColumnBox.TabStop = false;
+            this.externalColumnBox.Visible = false;
+            // 
+            // externalColumnLabel
+            // 
+            this.externalColumnLabel.AutoSize = true;
+            this.externalColumnLabel.Location = new System.Drawing.Point(232, 16);
+            this.externalColumnLabel.Name = "externalColumnLabel";
+            this.externalColumnLabel.Size = new System.Drawing.Size(127, 13);
+            this.externalColumnLabel.TabIndex = 1;
+            this.externalColumnLabel.Text = "External Location Column";
+            // 
+            // externalColumnComboBox
+            // 
+            this.externalColumnComboBox.FormattingEnabled = true;
+            this.externalColumnComboBox.Location = new System.Drawing.Point(232, 35);
+            this.externalColumnComboBox.Name = "externalColumnComboBox";
+            this.externalColumnComboBox.Size = new System.Drawing.Size(130, 21);
+            this.externalColumnComboBox.TabIndex = 0;
+            // 
+            // externalTableLabel
+            // 
+            this.externalTableLabel.AutoSize = true;
+            this.externalTableLabel.Location = new System.Drawing.Point(9, 16);
+            this.externalTableLabel.Name = "externalTableLabel";
+            this.externalTableLabel.Size = new System.Drawing.Size(75, 13);
+            this.externalTableLabel.TabIndex = 3;
+            this.externalTableLabel.Text = "External Table";
+            // 
+            // externalTableComboBox
+            // 
+            this.externalTableComboBox.FormattingEnabled = true;
+            this.externalTableComboBox.Location = new System.Drawing.Point(9, 35);
+            this.externalTableComboBox.Name = "externalTableComboBox";
+            this.externalTableComboBox.Size = new System.Drawing.Size(217, 21);
+            this.externalTableComboBox.TabIndex = 2;
+            this.externalTableComboBox.SelectionChangeCommitted += new System.EventHandler(this.externalTableComboBox_SelectionChangeCommitted);
+            // 
+            // externalBoolLabel
+            // 
+            this.externalBoolLabel.AutoSize = true;
+            this.externalBoolLabel.Location = new System.Drawing.Point(379, 16);
+            this.externalBoolLabel.Name = "externalBoolLabel";
+            this.externalBoolLabel.Size = new System.Drawing.Size(107, 13);
+            this.externalBoolLabel.TabIndex = 5;
+            this.externalBoolLabel.Text = "External Bool Column";
+            // 
+            // externalBoolComboBox
+            // 
+            this.externalBoolComboBox.FormattingEnabled = true;
+            this.externalBoolComboBox.Location = new System.Drawing.Point(379, 35);
+            this.externalBoolComboBox.Name = "externalBoolComboBox";
+            this.externalBoolComboBox.Size = new System.Drawing.Size(130, 21);
+            this.externalBoolComboBox.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1260, 900);
+            this.ClientSize = new System.Drawing.Size(1260, 1001);
+            this.Controls.Add(this.externalColumnBox);
             this.Controls.Add(this.exportCSVButton);
             this.Controls.Add(this.identifierBox);
             this.Controls.Add(this.actionBox);
@@ -377,6 +455,8 @@
             this.actionBox.PerformLayout();
             this.identifierBox.ResumeLayout(false);
             this.identifierBox.PerformLayout();
+            this.externalColumnBox.ResumeLayout(false);
+            this.externalColumnBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,13 +487,20 @@
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button addPrepsButton;
         private System.Windows.Forms.RadioButton prepsOnlyRadioButton;
-        private System.Windows.Forms.RadioButton importImagesRadioButton;
+        private System.Windows.Forms.RadioButton externalRadioButton;
         private System.Windows.Forms.GroupBox actionBox;
         private System.Windows.Forms.GroupBox identifierBox;
         private System.Windows.Forms.RadioButton byCatNumButton;
         private System.Windows.Forms.RadioButton byGUIDButton;
         private System.Windows.Forms.Button exportCSVButton;
         private System.Windows.Forms.SaveFileDialog exportCSVDialog;
+        private System.Windows.Forms.GroupBox externalColumnBox;
+        private System.Windows.Forms.ComboBox externalColumnComboBox;
+        private System.Windows.Forms.Label externalColumnLabel;
+        private System.Windows.Forms.Label externalTableLabel;
+        private System.Windows.Forms.ComboBox externalTableComboBox;
+        private System.Windows.Forms.Label externalBoolLabel;
+        private System.Windows.Forms.ComboBox externalBoolComboBox;
     }
 }
 

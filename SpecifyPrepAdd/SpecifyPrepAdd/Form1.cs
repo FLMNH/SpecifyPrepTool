@@ -144,6 +144,48 @@ namespace SpecifyPrepAdd
             }
         }
 
+        private List<string> getExternalColumns(string table)
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    conn.Open();
+                    DataTable colls = conn.GetSchema("Columns", new string[] { null, null, table, null });
+                    conn.Close();
+                    var columns = (from DataRowView row in colls.DefaultView
+                                   select row["COLUMN_NAME"].ToString());
+                    return columns.ToList();
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
+            }
+        }
+
+        private List<string> getExternalTables()
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    conn.Open();
+                    DataTable allTables = conn.GetSchema("Tables");
+                    conn.Close();
+                    var tables = (from DataRow row in allTables.Rows
+                                select row["TABLE_NAME"].ToString());
+                    return tables.ToList();
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
+            }
+        }
+
         private int GetCollectionObjectID(string identifier)
         {
             try
@@ -262,6 +304,10 @@ namespace SpecifyPrepAdd
                                 string prepGUID = GetPrepGUID(prepID);
                                 row.Cells[CSVDataGrid.Columns["Inserted Prep GUID"].Index].Value = prepGUID;
                             }
+                            if (externalRadioButton.Checked)
+                            {
+
+                            }
                         }
                     }
                 }
@@ -342,8 +388,21 @@ namespace SpecifyPrepAdd
         {
             try
             {
-                PrepTypeCombobox.DataSource = getPrepTypes(collectionComboBox.Text);
+                PrepTypeCombobox.DataSource = getPrepTypes(collectionComboBox.SelectedItem.ToString());
                 PrepTypeBox.Visible = true;
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+            }
+        }
+
+        private void externalTableComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                externalColumnComboBox.DataSource = getExternalColumns(externalTableComboBox.SelectedItem.ToString());
+                externalBoolComboBox.DataSource = getExternalColumns(externalTableComboBox.SelectedItem.ToString());
             }
             catch (Exception exc)
             {
@@ -353,15 +412,7 @@ namespace SpecifyPrepAdd
 
         private void addPrepsButton_Click(object sender, EventArgs e)
         {
-            if (importImagesRadioButton.Checked)
-            {
-                AddPreps();
-
-            }
-            else
-            {
-                AddPreps();
-            }
+            AddPreps();
         }
 
         private void exportCSVButton_Click(object sender, EventArgs e)
@@ -375,5 +426,17 @@ namespace SpecifyPrepAdd
             string filename = exportCSVDialog.FileName;
             File.WriteAllText(filename, csvText);
         }
+
+        private void prepsOnlyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            externalColumnBox.Visible = false;
+        }
+
+        private void externalRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            externalColumnBox.Visible = true;
+            externalTableComboBox.DataSource = getExternalTables();
+        }
+
     }
 }
