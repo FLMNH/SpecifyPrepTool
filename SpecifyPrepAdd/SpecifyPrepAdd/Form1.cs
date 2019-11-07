@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -64,17 +65,20 @@ namespace SpecifyPrepAdd
             DataTable dt = new DataTable();
             try
             {
-                // create columns
-                File.ReadLines(filePath).Take(1)
-                    .SelectMany(x => x.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                    .ToList()
-                    .ForEach(x => dt.Columns.Add(x.Trim()));
-
-                // add the rows
-                File.ReadLines(filePath).Skip(1)
-                    .Select(x => x.Split(','))
-                    .ToList()
-                    .ForEach(line => dt.Rows.Add(line));
+                bool hasHeaders = true;
+                string HDR = hasHeaders ? "Yes" : "No";
+                string strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties=\"Excel 12.0;HDR=" + HDR + ";IMEX=0\"";
+                OleDbConnection conn = new OleDbConnection(strConn);
+                conn.Open();
+                DataTable schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                DataRow schemaRow = schemaTable.Rows[0];
+                string sheet = schemaRow["TABLE_NAME"].ToString();
+                if (!sheet.EndsWith("_"))
+                {
+                    string query = "SELECT * FROM [" + sheet + "]";
+                    OleDbDataAdapter daExcel = new OleDbDataAdapter(query, conn);
+                    daExcel.Fill(dt);
+                }
             }
             catch (Exception exc)
             {
@@ -186,6 +190,24 @@ namespace SpecifyPrepAdd
             }
         }
 
+        private List<string> getSpreadsheetExternalColumn()
+        {
+            try
+            {
+                List<string> columns = new List<string>();
+                foreach (DataGridViewColumn col in CSVDataGrid.Columns)
+                {
+                    columns.Add(col.Name);
+                }
+                return columns;
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
+            }
+        }
+
         private int GetCollectionObjectID(string identifier)
         {
             try
@@ -251,6 +273,32 @@ namespace SpecifyPrepAdd
             }
         }
 
+        private void AddExternalLocation(long prepID, string externalLocation)
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    string table = externalTableComboBox.SelectedItem.ToString();
+                    string locationColumn = externalColumnComboBox.SelectedItem.ToString();
+                    string locationBoolColumn = externalBoolComboBox.SelectedItem.ToString();
+                    string sql = String.Format("UPDATE {0} SET {1} = @externalLocation, {2} = 1 WHERE preparationID = @prepID", table, locationColumn, locationBoolColumn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.Add("@externalLocation", MySqlDbType.String);
+                    cmd.Parameters.Add("@prepID", MySqlDbType.Int32);
+                    cmd.Parameters["@externalLocation"].Value = externalLocation;
+                    cmd.Parameters["@prepID"].Value = prepID;
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+            }
+        }
+
         private void AddPreps()
         {
             int count = 0;
@@ -303,10 +351,12 @@ namespace SpecifyPrepAdd
                                 long prepID = cmd.LastInsertedId;
                                 string prepGUID = GetPrepGUID(prepID);
                                 row.Cells[CSVDataGrid.Columns["Inserted Prep GUID"].Index].Value = prepGUID;
-                            }
-                            if (externalRadioButton.Checked)
-                            {
-
+                                if (externalRadioButton.Checked)
+                                {
+                                    string spreadsheetColumn = spreadsheetExternalColumnComboBox.SelectedItem.ToString();
+                                    string externalLocation = row.Cells[CSVDataGrid.Columns[spreadsheetColumn].Index].Value.ToString();
+                                    AddExternalLocation(prepID, externalLocation);
+                                }
                             }
                         }
                     }
@@ -357,6 +407,7 @@ namespace SpecifyPrepAdd
             try
             {
                 CSVDataGrid.DataSource = readCSV(SelectedCSVTextBox.Text).DefaultView;
+                spreadsheetExternalColumnComboBox.DataSource = getSpreadsheetExternalColumn();
             }
             catch (Exception exc)
             {

@@ -59,12 +59,14 @@
             this.exportCSVButton = new System.Windows.Forms.Button();
             this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
             this.externalColumnBox = new System.Windows.Forms.GroupBox();
-            this.externalColumnLabel = new System.Windows.Forms.Label();
-            this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
-            this.externalTableLabel = new System.Windows.Forms.Label();
-            this.externalTableComboBox = new System.Windows.Forms.ComboBox();
+            this.spreadsheetExternalLocationLabel = new System.Windows.Forms.Label();
+            this.spreadsheetExternalColumnComboBox = new System.Windows.Forms.ComboBox();
             this.externalBoolLabel = new System.Windows.Forms.Label();
             this.externalBoolComboBox = new System.Windows.Forms.ComboBox();
+            this.externalTableLabel = new System.Windows.Forms.Label();
+            this.externalTableComboBox = new System.Windows.Forms.ComboBox();
+            this.externalColumnLabel = new System.Windows.Forms.Label();
+            this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
@@ -178,7 +180,7 @@
             this.SelectCSVButton.Name = "SelectCSVButton";
             this.SelectCSVButton.Size = new System.Drawing.Size(144, 23);
             this.SelectCSVButton.TabIndex = 13;
-            this.SelectCSVButton.Text = "Select CSV File";
+            this.SelectCSVButton.Text = "Select XLS File";
             this.SelectCSVButton.UseVisualStyleBackColor = true;
             this.SelectCSVButton.Click += new System.EventHandler(this.SelectCSVButton_Click);
             // 
@@ -187,16 +189,16 @@
             this.CSVFileLabel.AutoSize = true;
             this.CSVFileLabel.Location = new System.Drawing.Point(3, 16);
             this.CSVFileLabel.Name = "CSVFileLabel";
-            this.CSVFileLabel.Size = new System.Drawing.Size(65, 13);
+            this.CSVFileLabel.Size = new System.Drawing.Size(104, 13);
             this.CSVFileLabel.TabIndex = 14;
-            this.CSVFileLabel.Text = "CSV Upload";
+            this.CSVFileLabel.Text = "Spreadsheet Upload";
             // 
             // CSVDataGrid
             // 
             this.CSVDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CSVDataGrid.Location = new System.Drawing.Point(47, 468);
+            this.CSVDataGrid.Location = new System.Drawing.Point(47, 535);
             this.CSVDataGrid.Name = "CSVDataGrid";
-            this.CSVDataGrid.Size = new System.Drawing.Size(1136, 513);
+            this.CSVDataGrid.Size = new System.Drawing.Size(1136, 446);
             this.CSVDataGrid.TabIndex = 15;
             // 
             // messageBoxLabel
@@ -216,7 +218,7 @@
             this.PrepTypeBox.Controls.Add(this.CSVFileLabel);
             this.PrepTypeBox.Controls.Add(this.PrepTypeLabel);
             this.PrepTypeBox.Controls.Add(this.PrepTypeCombobox);
-            this.PrepTypeBox.Location = new System.Drawing.Point(47, 350);
+            this.PrepTypeBox.Location = new System.Drawing.Point(47, 396);
             this.PrepTypeBox.Name = "PrepTypeBox";
             this.PrepTypeBox.Size = new System.Drawing.Size(534, 112);
             this.PrepTypeBox.TabIndex = 18;
@@ -237,7 +239,7 @@
             // 
             this.collectionBox.Controls.Add(this.collectionLabel);
             this.collectionBox.Controls.Add(this.collectionComboBox);
-            this.collectionBox.Location = new System.Drawing.Point(47, 280);
+            this.collectionBox.Location = new System.Drawing.Point(47, 326);
             this.collectionBox.Name = "collectionBox";
             this.collectionBox.Size = new System.Drawing.Size(534, 64);
             this.collectionBox.TabIndex = 19;
@@ -355,6 +357,8 @@
             // 
             // externalColumnBox
             // 
+            this.externalColumnBox.Controls.Add(this.spreadsheetExternalLocationLabel);
+            this.externalColumnBox.Controls.Add(this.spreadsheetExternalColumnComboBox);
             this.externalColumnBox.Controls.Add(this.externalBoolLabel);
             this.externalColumnBox.Controls.Add(this.externalBoolComboBox);
             this.externalColumnBox.Controls.Add(this.externalTableLabel);
@@ -363,27 +367,44 @@
             this.externalColumnBox.Controls.Add(this.externalColumnComboBox);
             this.externalColumnBox.Location = new System.Drawing.Point(47, 207);
             this.externalColumnBox.Name = "externalColumnBox";
-            this.externalColumnBox.Size = new System.Drawing.Size(534, 67);
+            this.externalColumnBox.Size = new System.Drawing.Size(534, 113);
             this.externalColumnBox.TabIndex = 26;
             this.externalColumnBox.TabStop = false;
             this.externalColumnBox.Visible = false;
             // 
-            // externalColumnLabel
+            // spreadsheetExternalLocationLabel
             // 
-            this.externalColumnLabel.AutoSize = true;
-            this.externalColumnLabel.Location = new System.Drawing.Point(232, 16);
-            this.externalColumnLabel.Name = "externalColumnLabel";
-            this.externalColumnLabel.Size = new System.Drawing.Size(127, 13);
-            this.externalColumnLabel.TabIndex = 1;
-            this.externalColumnLabel.Text = "External Location Column";
+            this.spreadsheetExternalLocationLabel.AutoSize = true;
+            this.spreadsheetExternalLocationLabel.Location = new System.Drawing.Point(6, 64);
+            this.spreadsheetExternalLocationLabel.Name = "spreadsheetExternalLocationLabel";
+            this.spreadsheetExternalLocationLabel.Size = new System.Drawing.Size(190, 13);
+            this.spreadsheetExternalLocationLabel.TabIndex = 7;
+            this.spreadsheetExternalLocationLabel.Text = "Spreadsheet External Location Column";
             // 
-            // externalColumnComboBox
+            // spreadsheetExternalColumnComboBox
             // 
-            this.externalColumnComboBox.FormattingEnabled = true;
-            this.externalColumnComboBox.Location = new System.Drawing.Point(232, 35);
-            this.externalColumnComboBox.Name = "externalColumnComboBox";
-            this.externalColumnComboBox.Size = new System.Drawing.Size(130, 21);
-            this.externalColumnComboBox.TabIndex = 0;
+            this.spreadsheetExternalColumnComboBox.FormattingEnabled = true;
+            this.spreadsheetExternalColumnComboBox.Location = new System.Drawing.Point(6, 83);
+            this.spreadsheetExternalColumnComboBox.Name = "spreadsheetExternalColumnComboBox";
+            this.spreadsheetExternalColumnComboBox.Size = new System.Drawing.Size(319, 21);
+            this.spreadsheetExternalColumnComboBox.TabIndex = 6;
+            // 
+            // externalBoolLabel
+            // 
+            this.externalBoolLabel.AutoSize = true;
+            this.externalBoolLabel.Location = new System.Drawing.Point(379, 16);
+            this.externalBoolLabel.Name = "externalBoolLabel";
+            this.externalBoolLabel.Size = new System.Drawing.Size(107, 13);
+            this.externalBoolLabel.TabIndex = 5;
+            this.externalBoolLabel.Text = "External Bool Column";
+            // 
+            // externalBoolComboBox
+            // 
+            this.externalBoolComboBox.FormattingEnabled = true;
+            this.externalBoolComboBox.Location = new System.Drawing.Point(379, 35);
+            this.externalBoolComboBox.Name = "externalBoolComboBox";
+            this.externalBoolComboBox.Size = new System.Drawing.Size(130, 21);
+            this.externalBoolComboBox.TabIndex = 4;
             // 
             // externalTableLabel
             // 
@@ -403,22 +424,22 @@
             this.externalTableComboBox.TabIndex = 2;
             this.externalTableComboBox.SelectionChangeCommitted += new System.EventHandler(this.externalTableComboBox_SelectionChangeCommitted);
             // 
-            // externalBoolLabel
+            // externalColumnLabel
             // 
-            this.externalBoolLabel.AutoSize = true;
-            this.externalBoolLabel.Location = new System.Drawing.Point(379, 16);
-            this.externalBoolLabel.Name = "externalBoolLabel";
-            this.externalBoolLabel.Size = new System.Drawing.Size(107, 13);
-            this.externalBoolLabel.TabIndex = 5;
-            this.externalBoolLabel.Text = "External Bool Column";
+            this.externalColumnLabel.AutoSize = true;
+            this.externalColumnLabel.Location = new System.Drawing.Point(232, 16);
+            this.externalColumnLabel.Name = "externalColumnLabel";
+            this.externalColumnLabel.Size = new System.Drawing.Size(127, 13);
+            this.externalColumnLabel.TabIndex = 1;
+            this.externalColumnLabel.Text = "External Location Column";
             // 
-            // externalBoolComboBox
+            // externalColumnComboBox
             // 
-            this.externalBoolComboBox.FormattingEnabled = true;
-            this.externalBoolComboBox.Location = new System.Drawing.Point(379, 35);
-            this.externalBoolComboBox.Name = "externalBoolComboBox";
-            this.externalBoolComboBox.Size = new System.Drawing.Size(130, 21);
-            this.externalBoolComboBox.TabIndex = 4;
+            this.externalColumnComboBox.FormattingEnabled = true;
+            this.externalColumnComboBox.Location = new System.Drawing.Point(232, 35);
+            this.externalColumnComboBox.Name = "externalColumnComboBox";
+            this.externalColumnComboBox.Size = new System.Drawing.Size(130, 21);
+            this.externalColumnComboBox.TabIndex = 0;
             // 
             // Form1
             // 
@@ -501,6 +522,8 @@
         private System.Windows.Forms.ComboBox externalTableComboBox;
         private System.Windows.Forms.Label externalBoolLabel;
         private System.Windows.Forms.ComboBox externalBoolComboBox;
+        private System.Windows.Forms.Label spreadsheetExternalLocationLabel;
+        private System.Windows.Forms.ComboBox spreadsheetExternalColumnComboBox;
     }
 }
 
