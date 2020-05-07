@@ -67,7 +67,7 @@ namespace SpecifyPrepAdd
             {
                 bool hasHeaders = true;
                 string HDR = hasHeaders ? "Yes" : "No";
-                string strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties=\"Excel 12.0;HDR=" + HDR + ";IMEX=0\"";
+                string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties=Excel 8.0";
                 OleDbConnection conn = new OleDbConnection(strConn);
                 conn.Open();
                 DataTable schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
