@@ -87,13 +87,13 @@ namespace SpecifyPrepAdd
             return dt;
         }
 
-        private DataSet GetTableDataSet(string tablename)
+        private DataSet GetTableDataSet(string tablename, string columns = "*", string order = "")
         {
             try
             {
                 using (MySqlConnection conn = GetMySqlConnection())
                 {
-                    string select = String.Format("SELECT * FROM {0}", tablename);
+                    string select = String.Format("SELECT {0} FROM {1}{2}", columns, tablename, order);
                     MySqlDataAdapter da = new MySqlDataAdapter(select, conn);
                     MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
                     DataSet ds = new DataSet();
@@ -122,6 +122,44 @@ namespace SpecifyPrepAdd
             {
                 messageBox.AppendText(exc.ToString() + "\n");
                 return null;
+            }
+        }
+
+        private void fillAgentDataGrid()
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    string select = @"SELECT u.Name, CONCAT(coalesce(LastName, ''), ', ', coalesce(FirstName, '')) as 'AgentName', a.agentid
+                                        FROM agent a 
+                                        LEFT JOIN specifyuser u USING(SpecifyUserID)
+                                        ORDER BY u.Name DESC, 
+                                            AgentName ASC";
+                    MySqlDataAdapter da = new MySqlDataAdapter(select, conn);
+                    MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds, "users");
+                    agentDataGrid.DataSource = ds.Tables["users"];
+                    agentDataGrid.Columns[0].HeaderText = "Specify Username";
+                    agentDataGrid.Columns[1].HeaderText = "Agent Name";
+                    agentDataGrid.Columns[2].HeaderText = "Agent ID";
+                    DataGridViewCheckBoxColumn selectCol = new DataGridViewCheckBoxColumn();
+                    selectCol.ValueType = typeof(bool);
+                    selectCol.Name = "select";
+                    selectCol.HeaderText = "Select";
+                    agentDataGrid.Columns.Add(selectCol);
+                    foreach (DataGridViewColumn column in agentDataGrid.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
+
+
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
             }
         }
 
@@ -314,6 +352,8 @@ namespace SpecifyPrepAdd
                             where (string)collrow["CollectionName"] == collectionComboBox.Text
                             select collrow);
                 int collectionID = (int)coll.First()["CollectionID"];
+                int agentIndex = agentDataGrid.SelectedCells[0].RowIndex;
+                int agentID = (int)agentDataGrid.Rows[agentIndex].Cells[2].Value;
                 using (MySqlConnection conn = GetMySqlConnection())
                 {
                     exportCSVButton.Visible = true;
@@ -334,14 +374,16 @@ namespace SpecifyPrepAdd
                                                             CreatedByAgentID, 
                                                             PrepTypeID, 
                                                             GUID)
-                                SELECT NOW(), 1, @CollectionID, 1, @CollectionObjectID, 1, @PrepTypeID, UUID()";
+                                SELECT NOW(), 1, @CollectionID, 1, @CollectionObjectID, @AgentID, @PrepTypeID, UUID()";
                             MySqlCommand cmd = new MySqlCommand(sql, conn);
                             cmd.Parameters.Add("@CollectionID", MySqlDbType.Int32);
                             cmd.Parameters.Add("@CollectionObjectID", MySqlDbType.Int32);
                             cmd.Parameters.Add("@PrepTypeID", MySqlDbType.Int32);
+                            cmd.Parameters.Add("@AgentID", MySqlDbType.Int32);
                             cmd.Parameters["@CollectionID"].Value = collectionID;
                             cmd.Parameters["@CollectionObjectID"].Value = collectionObjectID;
                             cmd.Parameters["@PrepTypeID"].Value = prepTypeID;
+                            cmd.Parameters["@AgentID"].Value = agentID;
                             conn.Open();
                             int rowsAffected = cmd.ExecuteNonQuery();
                             conn.Close();
@@ -425,6 +467,7 @@ namespace SpecifyPrepAdd
                     if (conn.State == ConnectionState.Open)
                     {
                         collectionComboBox.DataSource = getCollections();
+                        fillAgentDataGrid();
                         collectionBox.Visible = true;
                     }
                 }
@@ -489,5 +532,19 @@ namespace SpecifyPrepAdd
             externalTableComboBox.DataSource = getExternalTables();
         }
 
+        private void agentDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                foreach (DataGridViewRow row in agentDataGrid.Rows)
+                {
+                    row.Cells["select"].Value = false;
+                    agentDataGrid.ClearSelection();
+                }
+                agentDataGrid.Rows[e.RowIndex].Cells["select"].Selected = true;
+                agentDataGrid.Rows[e.RowIndex].Cells["select"].Value = true;
+            }
+                
+        }
     }
 }

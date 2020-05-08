@@ -67,12 +67,15 @@
             this.externalTableComboBox = new System.Windows.Forms.ComboBox();
             this.externalColumnLabel = new System.Windows.Forms.Label();
             this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
+            this.agentDataGrid = new System.Windows.Forms.DataGridView();
+            this.agentDataGridLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
             this.actionBox.SuspendLayout();
             this.identifierBox.SuspendLayout();
             this.externalColumnBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agentDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // MySQLUser
@@ -98,11 +101,11 @@
             // 
             // messageBox
             // 
-            this.messageBox.Location = new System.Drawing.Point(587, 38);
+            this.messageBox.Location = new System.Drawing.Point(597, 38);
             this.messageBox.Multiline = true;
             this.messageBox.Name = "messageBox";
             this.messageBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.messageBox.Size = new System.Drawing.Size(596, 424);
+            this.messageBox.Size = new System.Drawing.Size(586, 166);
             this.messageBox.TabIndex = 4;
             // 
             // MySQLPasswordLabel
@@ -198,13 +201,14 @@
             this.CSVDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CSVDataGrid.Location = new System.Drawing.Point(47, 535);
             this.CSVDataGrid.Name = "CSVDataGrid";
+            this.CSVDataGrid.ReadOnly = true;
             this.CSVDataGrid.Size = new System.Drawing.Size(1136, 446);
             this.CSVDataGrid.TabIndex = 15;
             // 
             // messageBoxLabel
             // 
             this.messageBoxLabel.AutoSize = true;
-            this.messageBoxLabel.Location = new System.Drawing.Point(584, 22);
+            this.messageBoxLabel.Location = new System.Drawing.Point(594, 22);
             this.messageBoxLabel.Name = "messageBoxLabel";
             this.messageBoxLabel.Size = new System.Drawing.Size(55, 13);
             this.messageBoxLabel.TabIndex = 17;
@@ -260,7 +264,7 @@
             this.collectionComboBox.FormattingEnabled = true;
             this.collectionComboBox.Location = new System.Drawing.Point(6, 29);
             this.collectionComboBox.Name = "collectionComboBox";
-            this.collectionComboBox.Size = new System.Drawing.Size(350, 21);
+            this.collectionComboBox.Size = new System.Drawing.Size(319, 21);
             this.collectionComboBox.TabIndex = 0;
             this.collectionComboBox.SelectionChangeCommitted += new System.EventHandler(this.collectionComboBox_SelectionChangeCommitted);
             // 
@@ -441,11 +445,32 @@
             this.externalColumnComboBox.Size = new System.Drawing.Size(130, 21);
             this.externalColumnComboBox.TabIndex = 0;
             // 
+            // agentDataGrid
+            // 
+            this.agentDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.agentDataGrid.Location = new System.Drawing.Point(597, 242);
+            this.agentDataGrid.Name = "agentDataGrid";
+            this.agentDataGrid.ReadOnly = true;
+            this.agentDataGrid.Size = new System.Drawing.Size(586, 266);
+            this.agentDataGrid.TabIndex = 27;
+            this.agentDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.agentDataGrid_CellClick);
+            // 
+            // agentDataGridLabel
+            // 
+            this.agentDataGridLabel.AutoSize = true;
+            this.agentDataGridLabel.Location = new System.Drawing.Point(594, 223);
+            this.agentDataGridLabel.Name = "agentDataGridLabel";
+            this.agentDataGridLabel.Size = new System.Drawing.Size(40, 13);
+            this.agentDataGridLabel.TabIndex = 28;
+            this.agentDataGridLabel.Text = "Agents";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 1001);
+            this.Controls.Add(this.agentDataGridLabel);
+            this.Controls.Add(this.agentDataGrid);
             this.Controls.Add(this.externalColumnBox);
             this.Controls.Add(this.exportCSVButton);
             this.Controls.Add(this.identifierBox);
@@ -478,6 +503,7 @@
             this.identifierBox.PerformLayout();
             this.externalColumnBox.ResumeLayout(false);
             this.externalColumnBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.agentDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,6 +550,8 @@
         private System.Windows.Forms.ComboBox externalBoolComboBox;
         private System.Windows.Forms.Label spreadsheetExternalLocationLabel;
         private System.Windows.Forms.ComboBox spreadsheetExternalColumnComboBox;
+        private System.Windows.Forms.DataGridView agentDataGrid;
+        private System.Windows.Forms.Label agentDataGridLabel;
     }
 }
 
