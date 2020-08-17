@@ -80,24 +80,27 @@
             // 
             // MySQLUser
             // 
-            this.MySQLUser.Location = new System.Drawing.Point(47, 38);
+            this.MySQLUser.Location = new System.Drawing.Point(47, 46);
             this.MySQLUser.Name = "MySQLUser";
             this.MySQLUser.Size = new System.Drawing.Size(226, 20);
             this.MySQLUser.TabIndex = 0;
+            this.MySQLUser.TextChanged += new System.EventHandler(this.MySQLUser_TextChanged);
             // 
             // MySQLHost
             // 
-            this.MySQLHost.Location = new System.Drawing.Point(47, 86);
+            this.MySQLHost.Location = new System.Drawing.Point(47, 94);
             this.MySQLHost.Name = "MySQLHost";
             this.MySQLHost.Size = new System.Drawing.Size(226, 20);
             this.MySQLHost.TabIndex = 2;
+            this.MySQLHost.TextChanged += new System.EventHandler(this.MySQLHost_TextChanged);
             // 
             // MySQLDb
             // 
-            this.MySQLDb.Location = new System.Drawing.Point(321, 86);
+            this.MySQLDb.Location = new System.Drawing.Point(321, 94);
             this.MySQLDb.Name = "MySQLDb";
-            this.MySQLDb.Size = new System.Drawing.Size(226, 20);
+            this.MySQLDb.Size = new System.Drawing.Size(232, 20);
             this.MySQLDb.TabIndex = 3;
+            this.MySQLDb.TextChanged += new System.EventHandler(this.MySQLDb_TextChanged);
             // 
             // messageBox
             // 
@@ -111,38 +114,42 @@
             // MySQLPasswordLabel
             // 
             this.MySQLPasswordLabel.AutoSize = true;
-            this.MySQLPasswordLabel.Location = new System.Drawing.Point(318, 22);
+            this.MySQLPasswordLabel.Location = new System.Drawing.Point(318, 30);
             this.MySQLPasswordLabel.Name = "MySQLPasswordLabel";
             this.MySQLPasswordLabel.Size = new System.Drawing.Size(91, 13);
             this.MySQLPasswordLabel.TabIndex = 5;
             this.MySQLPasswordLabel.Text = "MySQL Password";
+            this.MySQLPasswordLabel.Click += new System.EventHandler(this.MySQLPasswordLabel_Click);
             // 
             // MySQLUsernameLabel
             // 
             this.MySQLUsernameLabel.AutoSize = true;
-            this.MySQLUsernameLabel.Location = new System.Drawing.Point(44, 22);
+            this.MySQLUsernameLabel.Location = new System.Drawing.Point(44, 30);
             this.MySQLUsernameLabel.Name = "MySQLUsernameLabel";
             this.MySQLUsernameLabel.Size = new System.Drawing.Size(93, 13);
             this.MySQLUsernameLabel.TabIndex = 6;
             this.MySQLUsernameLabel.Text = "MySQL Username";
+            this.MySQLUsernameLabel.Click += new System.EventHandler(this.MySQLUsernameLabel_Click);
             // 
             // MySQLHostLabel
             // 
             this.MySQLHostLabel.AutoSize = true;
-            this.MySQLHostLabel.Location = new System.Drawing.Point(44, 70);
+            this.MySQLHostLabel.Location = new System.Drawing.Point(44, 78);
             this.MySQLHostLabel.Name = "MySQLHostLabel";
             this.MySQLHostLabel.Size = new System.Drawing.Size(67, 13);
             this.MySQLHostLabel.TabIndex = 7;
             this.MySQLHostLabel.Text = "MySQL Host";
+            this.MySQLHostLabel.Click += new System.EventHandler(this.MySQLHostLabel_Click);
             // 
             // MySQLDBLabel
             // 
             this.MySQLDBLabel.AutoSize = true;
-            this.MySQLDBLabel.Location = new System.Drawing.Point(318, 70);
+            this.MySQLDBLabel.Location = new System.Drawing.Point(318, 78);
             this.MySQLDBLabel.Name = "MySQLDBLabel";
             this.MySQLDBLabel.Size = new System.Drawing.Size(91, 13);
             this.MySQLDBLabel.TabIndex = 8;
             this.MySQLDBLabel.Text = "MySQL Database";
+            this.MySQLDBLabel.Click += new System.EventHandler(this.MySQLDBLabel_Click);
             // 
             // PrepTypeCombobox
             // 
@@ -163,11 +170,12 @@
             // 
             // MySQLPass
             // 
-            this.MySQLPass.Location = new System.Drawing.Point(321, 38);
+            this.MySQLPass.Location = new System.Drawing.Point(321, 46);
             this.MySQLPass.Name = "MySQLPass";
             this.MySQLPass.PasswordChar = '*';
-            this.MySQLPass.Size = new System.Drawing.Size(226, 20);
+            this.MySQLPass.Size = new System.Drawing.Size(232, 20);
             this.MySQLPass.TabIndex = 1;
+            this.MySQLPass.TextChanged += new System.EventHandler(this.MySQLPass_TextChanged);
             // 
             // SelectedCSVTextBox
             // 
@@ -311,12 +319,13 @@
             this.actionBox.Size = new System.Drawing.Size(281, 41);
             this.actionBox.TabIndex = 23;
             this.actionBox.TabStop = false;
+            this.actionBox.Visible = false;
             // 
             // identifierBox
             // 
             this.identifierBox.Controls.Add(this.byCatNumButton);
             this.identifierBox.Controls.Add(this.byGUIDButton);
-            this.identifierBox.Location = new System.Drawing.Point(47, 119);
+            this.identifierBox.Location = new System.Drawing.Point(47, 124);
             this.identifierBox.Name = "identifierBox";
             this.identifierBox.Size = new System.Drawing.Size(281, 41);
             this.identifierBox.TabIndex = 24;
@@ -489,9 +498,11 @@
             this.Controls.Add(this.MySQLHost);
             this.Controls.Add(this.MySQLPass);
             this.Controls.Add(this.MySQLUser);
+            this.KeyPreview = true;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Specify Prep Adder";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).EndInit();
             this.PrepTypeBox.ResumeLayout(false);
             this.PrepTypeBox.PerformLayout();

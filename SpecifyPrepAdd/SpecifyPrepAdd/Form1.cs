@@ -546,5 +546,54 @@ namespace SpecifyPrepAdd
             }
                 
         }
+
+        private void MySQLDBLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLHostLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLUsernameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLPasswordLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLDb_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLHost_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLPass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MySQLUser_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Shift && e.KeyCode == Keys.O)
+            {
+                actionBox.Show();
+                externalColumnBox.Show();
+            }
+        }
     }
 }
