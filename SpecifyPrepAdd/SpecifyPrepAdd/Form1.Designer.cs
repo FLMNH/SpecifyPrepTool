@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.MySQLUser = new System.Windows.Forms.TextBox();
             this.MySQLHost = new System.Windows.Forms.TextBox();
             this.MySQLDb = new System.Windows.Forms.TextBox();
@@ -69,6 +70,13 @@
             this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
             this.agentDataGrid = new System.Windows.Forms.DataGridView();
             this.agentDataGridLabel = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
@@ -76,6 +84,7 @@
             this.identifierBox.SuspendLayout();
             this.externalColumnBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.agentDataGrid)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MySQLUser
@@ -473,10 +482,68 @@
             this.agentDataGridLabel.TabIndex = 28;
             this.agentDataGridLabel.Text = "Agents";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutMenu,
+            this.HelpMenu});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1260, 24);
+            this.menuStrip1.TabIndex = 29;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // AboutMenu
+            // 
+            this.AboutMenu.Name = "AboutMenu";
+            this.AboutMenu.Size = new System.Drawing.Size(52, 20);
+            this.AboutMenu.Text = "About";
+            this.AboutMenu.Click += new System.EventHandler(this.AboutMenu_Click);
+            // 
+            // HelpMenu
+            // 
+            this.HelpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readmeToolStripMenuItem,
+            this.supportToolStripMenuItem});
+            this.HelpMenu.Name = "HelpMenu";
+            this.HelpMenu.Size = new System.Drawing.Size(44, 20);
+            this.HelpMenu.Text = "Help";
+            // 
+            // supportToolStripMenuItem
+            // 
+            this.supportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem,
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem});
+            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
+            this.supportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.supportToolStripMenuItem.Text = "Support";
+            // 
+            // readmeToolStripMenuItem
+            // 
+            this.readmeToolStripMenuItem.Name = "readmeToolStripMenuItem";
+            this.readmeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.readmeToolStripMenuItem.Text = "Readme";
+            this.readmeToolStripMenuItem.Click += new System.EventHandler(this.HelpMenu_Click);
+            // 
+            // thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem
+            // 
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Name = "thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnolo" +
+    "gyToolStripMenuItem";
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Size = new System.Drawing.Size(610, 22);
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Text = "This application was created by the Florida Museum of Natural History Office of M" +
+    "useum Technology.";
+            // 
+            // forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem
+            // 
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Name = "forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem";
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Size = new System.Drawing.Size(610, 22);
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Text = "For information or support issues, contact omt@floridamuseum.ufl.edu";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1260, 1001);
             this.Controls.Add(this.agentDataGridLabel);
             this.Controls.Add(this.agentDataGrid);
@@ -498,7 +565,12 @@
             this.Controls.Add(this.MySQLHost);
             this.Controls.Add(this.MySQLPass);
             this.Controls.Add(this.MySQLUser);
+            this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Specify Prep Adder";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -515,6 +587,8 @@
             this.externalColumnBox.ResumeLayout(false);
             this.externalColumnBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.agentDataGrid)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,6 +637,13 @@
         private System.Windows.Forms.ComboBox spreadsheetExternalColumnComboBox;
         private System.Windows.Forms.DataGridView agentDataGrid;
         private System.Windows.Forms.Label agentDataGridLabel;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem AboutMenu;
+        private System.Windows.Forms.ToolStripMenuItem HelpMenu;
+        private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readmeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem;
     }
 }
 

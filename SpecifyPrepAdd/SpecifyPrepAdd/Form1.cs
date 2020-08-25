@@ -125,6 +125,26 @@ namespace SpecifyPrepAdd
             }
         }
 
+        private String getSpecifyVersion()
+        {
+            try
+            {
+                using (MySqlConnection conn = GetMySqlConnection())
+                {
+                    string select = "SELECT AppVersion from spversion";
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(select, conn);
+                    string version = cmd.ExecuteScalar().ToString();
+                    return version;
+                }
+            }
+            catch (Exception exc)
+            {
+                messageBox.AppendText(exc.ToString() + "\n");
+                return null;
+            }
+        }
+
         private void fillAgentDataGrid()
         {
             try
@@ -466,6 +486,11 @@ namespace SpecifyPrepAdd
                     conn.Open();
                     if (conn.State == ConnectionState.Open)
                     {
+                        string spversion = getSpecifyVersion();
+                        if (spversion != Properties.Settings.Default.SpecifyVersion)
+                        {
+                            MessageBox.Show(string.Format("WARNING: Specify version mismatch.  This application supports and has been tested with Specify version {0}.  Your version is {1}.  Use at your own risk.", Properties.Settings.Default.SpecifyVersion, spversion));
+                        } 
                         collectionComboBox.DataSource = getCollections();
                         fillAgentDataGrid();
                         collectionBox.Visible = true;
@@ -594,6 +619,18 @@ namespace SpecifyPrepAdd
                 actionBox.Show();
                 externalColumnBox.Show();
             }
+        }
+
+        private void AboutMenu_Click(object sender, EventArgs e)
+        {
+            AboutBox1 a = new AboutBox1();
+            a.Show();
+        }
+
+        private void HelpMenu_Click(object sender, EventArgs e)
+        {
+            HelpForm helpForm = new HelpForm();
+            helpForm.ShowDialog();
         }
     }
 }

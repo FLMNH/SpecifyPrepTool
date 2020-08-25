@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,46 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="HelpString" xml:space="preserve">
+    <value>==Specify Prep Adder Quick Help==
+
+The Specify Prep Adder is a tool that ingests an xls spreadsheet, reads it, and for each row,
+adds a preparation in the Specify Database to a specific Collection Object.  To do so you must: 
+1) Connect to the database. 
+2) Select which type of identifier the incoming spreadsheet will have to identify each 
+	Collection Object the Preparations are to be added to.  It is important to note: 
+	The first column of each row of the spreadsheet MUST have either the Catalog Number 
+	or GUID of the Collection Object a Preparation is to be added to.
+3) Select the Specify Agent record to be associated with creating the Preparation.
+4) Select the Specify Collection that the Collection Objects belong to.
+5) Upload the xls spreadsheet and add the preps.
+6) (Optional) After sucessfully adding the preps, download a csv with the original spreadsheet values, 
+	followed by the GUIDs of the added preps.
+
+In order for the actions above to complete, it is important to take the following steps sequentially:
+1) Enter database credentials in top inputs and click 'Connect to DB'
+	a) MySQL Username - MySQL user on database server, not Specify user.
+	b) MySQL Password - MySQL password for database user.
+	c) MySQL Host - hostname or ip address of database server.
+	d) MySQL Database - the database name of the targeted Specify instance.
+2) Select Identifier type for incoming xls spreadsheet.  Catalog Number or GUID is supported.
+3) Select Agent by clicking corresponding Select checkbox.
+4) Select Collection with Select Collection dropdown. You MUST select from this dropdown, even if you 
+	only have one Collection within your Specify instance.
+5) Upolad the xls spreadsheet by clicking 'Select XLS File'. Once proccessed, you should see a depiction of the 
+	spreadsheet in the box below.
+6) Select what type of Preparation you are adding with the 'Prep Type' dropdown.
+7) Click 'Add Preps'.  This is a final action and will attempt to add the Preparations.
+8) Once sucessfully completed, a modal popup should inform you of the number of Preparations that were added.
+9) (Optional) Download a csv file with the added Praparation GUIDs and their associated Colleciton Object 
+	identifiers.
+
+Note:  The 'Messages' box will display any exception and stack trace information due to errors.  These are 
+	raw exception messages, so may be terse, but informative.</value>
+  </data>
 </root>

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Specify Prep Adder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The Specify Prep Adder is a tool that ingests an xls spreadsheet, reads it, and for each row, adds a preparation in the Specify Database to a specific Collection Object. This tool was produced by the Florida Museum of Natural History, Office of Museum Technology.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Florida Museum of Natural History Office of Museum Technology")]
 [assembly: AssemblyProduct("SpecifyPrepAdd")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright ©  2020 Florida Museum of Natural History, University of Florida")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
