@@ -73,6 +73,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CSVDataGrid)).BeginInit();
             this.PrepTypeBox.SuspendLayout();
             this.collectionBox.SuspendLayout();
@@ -494,12 +498,46 @@
             this.AboutMenu.Name = "AboutMenu";
             this.AboutMenu.Size = new System.Drawing.Size(52, 20);
             this.AboutMenu.Text = "About";
+            this.AboutMenu.Click += new System.EventHandler(this.AboutMenu_Click);
             // 
             // HelpMenu
             // 
+            this.HelpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readmeToolStripMenuItem,
+            this.supportToolStripMenuItem});
             this.HelpMenu.Name = "HelpMenu";
             this.HelpMenu.Size = new System.Drawing.Size(44, 20);
             this.HelpMenu.Text = "Help";
+            // 
+            // supportToolStripMenuItem
+            // 
+            this.supportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem,
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem});
+            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
+            this.supportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.supportToolStripMenuItem.Text = "Support";
+            // 
+            // readmeToolStripMenuItem
+            // 
+            this.readmeToolStripMenuItem.Name = "readmeToolStripMenuItem";
+            this.readmeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.readmeToolStripMenuItem.Text = "Readme";
+            this.readmeToolStripMenuItem.Click += new System.EventHandler(this.HelpMenu_Click);
+            // 
+            // thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem
+            // 
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Name = "thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnolo" +
+    "gyToolStripMenuItem";
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Size = new System.Drawing.Size(610, 22);
+            this.thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem.Text = "This application was created by the Florida Museum of Natural History Office of M" +
+    "useum Technology.";
+            // 
+            // forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem
+            // 
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Name = "forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem";
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Size = new System.Drawing.Size(610, 22);
+            this.forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem.Text = "For information or support issues, contact omt@floridamuseum.ufl.edu";
             // 
             // Form1
             // 
@@ -602,6 +640,10 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem AboutMenu;
         private System.Windows.Forms.ToolStripMenuItem HelpMenu;
+        private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readmeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thisApplicationWasCreatedByTheFloridaMuseumOfNaturalHistoryOfficeOfMuseumTechnologyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forInformationOrSupportIssuesContactOmtfloridamuseumufleduToolStripMenuItem;
     }
 }
 
