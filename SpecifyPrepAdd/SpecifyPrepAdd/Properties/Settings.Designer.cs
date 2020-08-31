@@ -25,19 +25,19 @@ namespace SpecifyPrepAdd.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6.8.00")]
-        public string SpecifyVersion {
+        [global::System.Configuration.DefaultSettingValueAttribute("omt@floridamuseum.ufl.edu")]
+        public string SupportContact {
             get {
-                return ((string)(this["SpecifyVersion"]));
+                return ((string)(this["SupportContact"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("omt@floridamuseum.ufl.edu")]
-        public string SupportContact {
+        [global::System.Configuration.DefaultSettingValueAttribute("6.7.04")]
+        public string SpecifyVersion {
             get {
-                return ((string)(this["SupportContact"]));
+                return ((string)(this["SpecifyVersion"]));
             }
         }
     }
