@@ -34,7 +34,7 @@ namespace SpecifyPrepAdd.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("6.7.04")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6.8.00")]
         public string SpecifyVersion {
             get {
                 return ((string)(this["SpecifyVersion"]));
