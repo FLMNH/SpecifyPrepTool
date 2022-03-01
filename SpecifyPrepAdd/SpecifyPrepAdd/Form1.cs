@@ -27,9 +27,19 @@ namespace SpecifyPrepAdd
 {
     public partial class Form1 : Form
     {
+        private string connectionString;
+        private int agentID;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public Form1(string connectionstring, int agentID)
+        {
+            InitializeComponent();
+            this.connectionString = connectionstring;
+            this.agentID = agentID;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,14 +52,7 @@ namespace SpecifyPrepAdd
         {
             try
             {
-                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
-                builder.Server = MySQLHost.Text;
-                builder.Database = MySQLDb.Text;
-                builder.AllowZeroDateTime = true;
-                builder.Port = 3306;
-                builder.UserID = MySQLUser.Text;
-                builder.Password = MySQLPass.Text;
-                return new MySqlConnection(builder.ConnectionString);
+               return new MySqlConnection(this.connectionString);
             }
             catch (Exception e)
             {
