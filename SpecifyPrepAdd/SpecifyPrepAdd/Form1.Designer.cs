@@ -448,6 +448,7 @@
             this.SelectedCSVTextBox.Name = "SelectedCSVTextBox";
             this.SelectedCSVTextBox.Size = new System.Drawing.Size(350, 20);
             this.SelectedCSVTextBox.TabIndex = 12;
+            this.SelectedCSVTextBox.Click += new System.EventHandler(this.SelectedCSVTextBox_Click);
             // 
             // SelectCSVButton
             // 

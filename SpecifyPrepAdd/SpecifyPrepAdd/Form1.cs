@@ -451,6 +451,7 @@ namespace SpecifyPrepAdd
             {
                 SelectedCSVTextBox.Text = openFileDlg.FileName;
             }
+            SelectedCSVTextBox_Click(sender, e);
         }
 
         private void SelectedCSVTextBox_Click(object sender, EventArgs e)
