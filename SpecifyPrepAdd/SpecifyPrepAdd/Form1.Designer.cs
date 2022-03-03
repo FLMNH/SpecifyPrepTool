@@ -333,6 +333,7 @@
             this.exportCSVButton.TabIndex = 30;
             this.exportCSVButton.Text = "Export CSV";
             this.exportCSVButton.UseVisualStyleBackColor = true;
+            this.exportCSVButton.Click += new System.EventHandler(this.exportCSVButton_Click);
             // 
             // identifierBox
             // 
@@ -439,6 +440,7 @@
             this.addPrepsButton.TabIndex = 15;
             this.addPrepsButton.Text = "Add Preps";
             this.addPrepsButton.UseVisualStyleBackColor = true;
+            this.addPrepsButton.Click += new System.EventHandler(this.addPrepsButton_Click);
             // 
             // SelectedCSVTextBox
             // 
@@ -455,6 +457,7 @@
             this.SelectCSVButton.TabIndex = 13;
             this.SelectCSVButton.Text = "Select XLS File";
             this.SelectCSVButton.UseVisualStyleBackColor = true;
+            this.SelectCSVButton.Click += new System.EventHandler(this.SelectCSVButton_Click);
             // 
             // CSVFileLabel
             // 
