@@ -372,7 +372,7 @@ namespace SpecifyPrepAdd
                     CSVDataGrid.Columns.Add(newColl);
                     foreach (DataGridViewRow row in CSVDataGrid.Rows)
                     {
-                        if (row.Cells[0].Value != null || row.Cells[0].Value != DBNull.Value || !String.IsNullOrWhiteSpace(row.Cells[0].Value.ToString()))
+                        if (row.Cells[0].Value != null && row.Cells[0].Value != DBNull.Value && !String.IsNullOrWhiteSpace(row.Cells[0].Value.ToString()))
                         {
                             int collectionObjectID = GetCollectionObjectID(row.Cells[0].Value.ToString());
                             string sql = @"INSERT INTO preparation (TimestampCreated, 
@@ -534,6 +534,7 @@ namespace SpecifyPrepAdd
             if (externalRadioButton.Checked)
             {
                 externalColumnBox.Visible = true;
+                externalTableComboBox.DataSource = getExternalTables();
             }
             else
             {

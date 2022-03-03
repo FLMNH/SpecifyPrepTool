@@ -307,6 +307,7 @@
             this.externalTableComboBox.Name = "externalTableComboBox";
             this.externalTableComboBox.Size = new System.Drawing.Size(217, 21);
             this.externalTableComboBox.TabIndex = 2;
+            this.externalTableComboBox.SelectionChangeCommitted += new System.EventHandler(this.externalTableComboBox_SelectionChangeCommitted);
             // 
             // externalColumnLabel
             // 
