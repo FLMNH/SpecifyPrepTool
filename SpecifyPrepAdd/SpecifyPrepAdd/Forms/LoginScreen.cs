@@ -45,9 +45,11 @@ namespace SpecifyPrepAdd
                     Properties.Settings.Default.SpecifyUserKey = tbKey.Text;
                     Properties.Settings.Default.Save();
                     int agentID = getAgentID(conn, getSpecifyUserID(conn, tbUserName.Text, tbPassword.Text));
+                    int collectionID = getCollectionID(conn, tbCollectionName.Text);
                     if (hasPreparationModify(conn, tbUserName.Text,tbPassword.Text, tbCollectionName.Text))
                     {
-                        Form1 form1 = new Form1(connectionString, agentID);
+                        this.Hide();
+                        Form1 form1 = new Form1(connectionString, agentID, collectionID, tbUserName.Text, tbCollectionName.Text, tbDBName.Text, tbServerName.Text);
                         form1.ShowDialog();
                         this.Close();
                     }

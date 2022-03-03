@@ -29,17 +29,37 @@ namespace SpecifyPrepAdd
     {
         private string connectionString;
         private int agentID;
+        private int collectionID;
+        private string userName;
+        private string collectionName;
+        private string databaseName;
+        private string serverName;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        public Form1(string connectionstring, int agentID)
+        public Form1(string connectionstring, int agentID, int collectionID, string userName, string collectionName, string databaseName, string serverName)
         {
             InitializeComponent();
             this.connectionString = connectionstring;
             this.agentID = agentID;
+            this.userName = userName;
+            this.collectionID = collectionID;
+            this.collectionName = collectionName;
+            this.databaseName = databaseName;
+            this.serverName = serverName;
+            toolStripStatusLabelServer.Text = this.serverName;
+            toolStripStatusLabelDatabase.Text = this.databaseName;
+            toolStripStatusLabelCollection.Text = this.collectionName;
+            toolStripStatusLabelUserName.Text = this.userName;
+            string spversion = getSpecifyVersion();
+            if (spversion != Properties.Settings.Default.SpecifyVersion)
+            {
+                MessageBox.Show(string.Format("WARNING: Specify version mismatch.  This application supports and has been tested with Specify version {0}.  Your version is {1}.  Use at your own risk.", Properties.Settings.Default.SpecifyVersion, spversion));
+            }
+            PrepTypeCombobox.DataSource = getPrepTypes(this.collectionName);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -60,19 +80,6 @@ namespace SpecifyPrepAdd
                 return null;
             }
            
-        }
-
-        private void PopulatePrepTypeButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MySqlConnection conn = GetMySqlConnection();
-
-            }
-            catch (Exception exc)
-            {
-                messageBox.AppendText(exc.ToString() + "\n");
-            }
         }
 
         private DataTable readCSV(string filePath)
@@ -157,44 +164,6 @@ namespace SpecifyPrepAdd
             {
                 messageBox.AppendText(exc.ToString() + "\n");
                 return null;
-            }
-        }
-
-        private void fillAgentDataGrid()
-        {
-            try
-            {
-                using (MySqlConnection conn = GetMySqlConnection())
-                {
-                    string select = @"SELECT u.Name, CONCAT(coalesce(LastName, ''), ', ', coalesce(FirstName, '')) as 'AgentName', a.agentid
-                                        FROM agent a 
-                                        LEFT JOIN specifyuser u USING(SpecifyUserID)
-                                        ORDER BY u.Name DESC, 
-                                            AgentName ASC";
-                    MySqlDataAdapter da = new MySqlDataAdapter(select, conn);
-                    MySqlCommandBuilder cb = new MySqlCommandBuilder(da);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "users");
-                    agentDataGrid.DataSource = ds.Tables["users"];
-                    agentDataGrid.Columns[0].HeaderText = "Specify Username";
-                    agentDataGrid.Columns[1].HeaderText = "Agent Name";
-                    agentDataGrid.Columns[2].HeaderText = "Agent ID";
-                    DataGridViewCheckBoxColumn selectCol = new DataGridViewCheckBoxColumn();
-                    selectCol.ValueType = typeof(bool);
-                    selectCol.Name = "select";
-                    selectCol.HeaderText = "Select";
-                    agentDataGrid.Columns.Add(selectCol);
-                    foreach (DataGridViewColumn column in agentDataGrid.Columns)
-                    {
-                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    }
-
-
-                }
-            }
-            catch (Exception exc)
-            {
-                messageBox.AppendText(exc.ToString() + "\n");
             }
         }
 
@@ -297,7 +266,7 @@ namespace SpecifyPrepAdd
                         cmd.Parameters.Add("@CatNum", MySqlDbType.String);
                         cmd.Parameters.Add("@CollName", MySqlDbType.String);
                         cmd.Parameters["@CatNum"].Value = identifier;
-                        cmd.Parameters["@CollName"].Value = collectionComboBox.Text;
+                        cmd.Parameters["@CollName"].Value = this.collectionName;
                         conn.Open();
                         int CollectionObjectID = (int)cmd.ExecuteScalar();
                         conn.Close();
@@ -382,13 +351,18 @@ namespace SpecifyPrepAdd
                            where (string)preprow["Name"] == PrepTypeCombobox.Text
                            select preprow);
                 int prepTypeID = (int)pts.First()["PrepTypeID"];
-                DataSet collections = GetTableDataSet("collection");
+                // This is block is deprecated by the Specify Auth from LoginScreen.
+                // keeping it for debugging reference for now.
+                /* DataSet collections = GetTableDataSet("collection");
                 var coll = (from DataRow collrow in collections.Tables["collection"].AsEnumerable()
                             where (string)collrow["CollectionName"] == collectionComboBox.Text
                             select collrow);
                 int collectionID = (int)coll.First()["CollectionID"];
                 int agentIndex = agentDataGrid.SelectedCells[0].RowIndex;
                 int agentID = (int)agentDataGrid.Rows[agentIndex].Cells[2].Value;
+                */
+                int collectionID = this.collectionID;
+                int agentID = this.agentID;
                 using (MySqlConnection conn = GetMySqlConnection())
                 {
                     exportCSVButton.Visible = true;
@@ -492,45 +466,6 @@ namespace SpecifyPrepAdd
             }
         }
 
-        private void connectButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (MySqlConnection conn = GetMySqlConnection())
-                {
-                    conn.Open();
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        string spversion = getSpecifyVersion();
-                        if (spversion != Properties.Settings.Default.SpecifyVersion)
-                        {
-                            MessageBox.Show(string.Format("WARNING: Specify version mismatch.  This application supports and has been tested with Specify version {0}.  Your version is {1}.  Use at your own risk.", Properties.Settings.Default.SpecifyVersion, spversion));
-                        } 
-                        collectionComboBox.DataSource = getCollections();
-                        fillAgentDataGrid();
-                        collectionBox.Visible = true;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                messageBox.AppendText(exc.ToString() + "\n");
-            }
-        }
-
-        private void collectionComboBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            try
-            {
-                PrepTypeCombobox.DataSource = getPrepTypes(collectionComboBox.SelectedItem.ToString());
-                PrepTypeBox.Visible = true;
-            }
-            catch (Exception exc)
-            {
-                messageBox.AppendText(exc.ToString() + "\n");
-            }
-        }
-
         private void externalTableComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             try
@@ -572,62 +507,7 @@ namespace SpecifyPrepAdd
             externalTableComboBox.DataSource = getExternalTables();
         }
 
-        private void agentDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                foreach (DataGridViewRow row in agentDataGrid.Rows)
-                {
-                    row.Cells["select"].Value = false;
-                    agentDataGrid.ClearSelection();
-                }
-                agentDataGrid.Rows[e.RowIndex].Cells["select"].Selected = true;
-                agentDataGrid.Rows[e.RowIndex].Cells["select"].Value = true;
-            }
-                
-        }
-
-        private void MySQLDBLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLHostLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLUsernameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLPasswordLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLDb_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLHost_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MySQLUser_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+       private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.Shift && e.KeyCode == Keys.O)
             {
@@ -646,6 +526,18 @@ namespace SpecifyPrepAdd
         {
             HelpForm helpForm = new HelpForm();
             helpForm.ShowDialog();
+        }
+
+        private void externalRadioButton_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (externalRadioButton.Checked)
+            {
+                externalColumnBox.Visible = true;
+            }
+            else
+            {
+                externalColumnBox.Visible = false;
+            }
         }
     }
 }

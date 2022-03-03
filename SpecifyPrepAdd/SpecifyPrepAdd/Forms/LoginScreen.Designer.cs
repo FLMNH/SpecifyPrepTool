@@ -95,7 +95,7 @@
             this.tbServerName.Location = new System.Drawing.Point(523, 108);
             this.tbServerName.Name = "tbServerName";
             this.tbServerName.Size = new System.Drawing.Size(255, 26);
-            this.tbServerName.TabIndex = 8;
+            this.tbServerName.TabIndex = 2;
             // 
             // lblCollectionName
             // 
@@ -113,7 +113,7 @@
             this.tbCollectionName.Location = new System.Drawing.Point(523, 176);
             this.tbCollectionName.Name = "tbCollectionName";
             this.tbCollectionName.Size = new System.Drawing.Size(255, 26);
-            this.tbCollectionName.TabIndex = 16;
+            this.tbCollectionName.TabIndex = 4;
             // 
             // lblKey
             // 
@@ -131,7 +131,7 @@
             this.tbKey.Location = new System.Drawing.Point(137, 274);
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(641, 26);
-            this.tbKey.TabIndex = 18;
+            this.tbKey.TabIndex = 6;
             // 
             // lblPassword
             // 
@@ -149,7 +149,7 @@
             this.tbPassword.Location = new System.Drawing.Point(523, 241);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(255, 26);
-            this.tbPassword.TabIndex = 14;
+            this.tbPassword.TabIndex = 1;
             this.tbPassword.UseSystemPasswordChar = true;
             // 
             // lblUserName
@@ -168,7 +168,7 @@
             this.tbUserName.Location = new System.Drawing.Point(523, 209);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(255, 26);
-            this.tbUserName.TabIndex = 17;
+            this.tbUserName.TabIndex = 5;
             // 
             // lblDatabaseName
             // 
@@ -186,7 +186,7 @@
             this.tbDBName.Location = new System.Drawing.Point(523, 144);
             this.tbDBName.Name = "tbDBName";
             this.tbDBName.Size = new System.Drawing.Size(255, 26);
-            this.tbDBName.TabIndex = 15;
+            this.tbDBName.TabIndex = 3;
             // 
             // btnConnect
             // 
@@ -195,13 +195,14 @@
             this.btnConnect.Location = new System.Drawing.Point(644, 315);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(134, 28);
-            this.btnConnect.TabIndex = 24;
+            this.btnConnect.TabIndex = 7;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // LoginScreen
             // 
+            this.AcceptButton = this.btnConnect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
