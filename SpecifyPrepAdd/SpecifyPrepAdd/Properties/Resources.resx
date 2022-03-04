@@ -127,28 +127,22 @@ adds a preparation in the Specify Database to a specific Collection Object.  To 
 	Collection Object the Preparations are to be added to.  It is important to note: 
 	The first column of each row of the spreadsheet MUST have either the Catalog Number 
 	or GUID of the Collection Object a Preparation is to be added to.
-3) Select the Specify Agent record to be associated with creating the Preparation.
-4) Select the Specify Collection that the Collection Objects belong to.
-5) Upload the xls spreadsheet and add the preps.
-6) (Optional) After sucessfully adding the preps, download a csv with the original spreadsheet values, 
+3) Upload the xls spreadsheet and add the preps.
+4) (Optional) After sucessfully adding the preps, download a csv with the original spreadsheet values, 
 	followed by the GUIDs of the added preps.
 
 In order for the actions above to complete, it is important to take the following steps sequentially:
-1) Enter database credentials in top inputs and click 'Connect to DB'
-	a) MySQL Username - MySQL user on database server, not Specify user.
-	b) MySQL Password - MySQL password for database user.
-	c) MySQL Host - hostname or ip address of database server.
-	d) MySQL Database - the database name of the targeted Specify instance.
+1) Enter your Specify database server name, database name, collection name, username, password, and key,
+    as you would to logon to Specify.
 2) Select Identifier type for incoming xls spreadsheet.  Catalog Number or GUID is supported.
-3) Select Agent by clicking corresponding Select checkbox.
-4) Select Collection with Select Collection dropdown. You MUST select from this dropdown, even if you 
-	only have one Collection within your Specify instance.
-5) Upolad the xls spreadsheet by clicking 'Select XLS File'. Once proccessed, you should see a depiction of the 
+3) Upolad the xls spreadsheet by clicking 'Select XLS File'. Once proccessed, you should see a depiction of the 
 	spreadsheet in the box below.
-6) Select what type of Preparation you are adding with the 'Prep Type' dropdown.
-7) Click 'Add Preps'.  This is a final action and will attempt to add the Preparations.
-8) Once sucessfully completed, a modal popup should inform you of the number of Preparations that were added.
-9) (Optional) Download a csv file with the added Praparation GUIDs and their associated Colleciton Object 
+4) Select what type of Preparation you are adding with the 'Prep Type' dropdown.
+5) If using the Floridamuseum CDN Middleware, and adding external preps, select the Also Populate External radio
+   button. Select the appropriate table, and columns from the External drop down lists.
+6) Click 'Add Preps'.  This is a final action and will attempt to add the Preparations.
+7) Once sucessfully completed, a modal popup should inform you of the number of Preparations that were added.
+8) (Optional) Download a csv file with the added Praparation GUIDs and their associated Colleciton Object 
 	identifiers.
 
 Note:  The 'Messages' box will display any exception and stack trace information due to errors.  These are 
