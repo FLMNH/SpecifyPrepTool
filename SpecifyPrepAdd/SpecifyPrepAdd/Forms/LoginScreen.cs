@@ -49,8 +49,8 @@ namespace SpecifyPrepAdd
                     if (hasPreparationModify(conn, tbUserName.Text,tbPassword.Text, tbCollectionName.Text))
                     {
                         this.Hide();
-                        Form1 form1 = new Form1(connectionString, agentID, collectionID, tbUserName.Text, tbCollectionName.Text, tbDBName.Text, tbServerName.Text);
-                        form1.ShowDialog();
+                        MainWindow mainWindow = new MainWindow(connectionString, agentID, collectionID, tbUserName.Text, tbCollectionName.Text, tbDBName.Text, tbServerName.Text);
+                        mainWindow.ShowDialog();
                         this.Close();
                     }
                 }
@@ -60,7 +60,7 @@ namespace SpecifyPrepAdd
                 }
                 catch (System.Security.Cryptography.CryptographicException ex)
                 {
-                    MessageBox.Show("Unable to connect. Check that all fields are correct.");
+                    MessageBox.Show("Unable to connect. Check that all fields are correct. " + ex.Message.ToString());
                 }
                 catch (Exception ex)
                 {

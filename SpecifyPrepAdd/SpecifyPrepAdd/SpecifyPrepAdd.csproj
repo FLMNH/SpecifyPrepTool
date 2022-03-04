@@ -48,6 +48,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -102,25 +105,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
+    <Compile Include="Forms\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
+    <Compile Include="Forms\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Decryptor.cs" />
     <Compile Include="Classes\PKCSKeyGenerator.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Forms\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Forms\HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginScreen.cs">
       <SubType>Form</SubType>
@@ -130,14 +133,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox1.resx">
+    <EmbeddedResource Include="Forms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginScreen.resx">
       <DependentUpon>LoginScreen.cs</DependentUpon>
@@ -179,7 +182,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <Content Include="favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="HelpText.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

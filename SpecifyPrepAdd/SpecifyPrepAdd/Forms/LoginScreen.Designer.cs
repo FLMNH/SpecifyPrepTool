@@ -132,6 +132,7 @@
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(641, 26);
             this.tbKey.TabIndex = 6;
+            this.tbKey.UseSystemPasswordChar = true;
             // 
             // lblPassword
             // 
@@ -223,6 +224,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginScreen";
             this.Text = "LoginScreen";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

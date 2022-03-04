@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Specify Prep Adder")]
 [assembly: AssemblyDescription("The Specify Prep Adder is a tool that ingests an xls spreadsheet, reads it, and for each row, adds a preparation in the Specify Database to a specific Collection Object. This tool was produced by the Florida Museum of Natural History, Office of Museum Technology.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Florida Museum of Natural History Office of Museum Technology")]
+[assembly: AssemblyCompany("Florida Museum of Natural History, UF")]
 [assembly: AssemblyProduct("SpecifyPrepAdd")]
-[assembly: AssemblyCopyright("Copyright ©  2020 Florida Museum of Natural History, University of Florida")]
+[assembly: AssemblyCopyright("Copyright ©  2022 Florida Museum of Natural History, University of Florida")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

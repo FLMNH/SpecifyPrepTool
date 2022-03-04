@@ -25,7 +25,7 @@ using MySql.Data.MySqlClient;
 
 namespace SpecifyPrepAdd
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         private string connectionString;
         private int agentID;
@@ -35,12 +35,12 @@ namespace SpecifyPrepAdd
         private string databaseName;
         private string serverName;
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
         }
 
-        public Form1(string connectionstring, int agentID, int collectionID, string userName, string collectionName, string databaseName, string serverName)
+        public MainWindow(string connectionstring, int agentID, int collectionID, string userName, string collectionName, string databaseName, string serverName)
         {
             InitializeComponent();
             this.connectionString = connectionstring;
@@ -540,6 +540,17 @@ namespace SpecifyPrepAdd
             {
                 externalColumnBox.Visible = false;
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
