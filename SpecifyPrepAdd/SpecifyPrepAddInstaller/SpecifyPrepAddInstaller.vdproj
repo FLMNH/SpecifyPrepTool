@@ -580,12 +580,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FAAB3B80D1BF1F3F335544A5D03A98D5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FEC11D1D2EBD4267AC2B3E03ACAD8CD9"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -947,6 +941,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_41AE1CE19B7D61CA1A7CBE6E504C97A9"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FAAB3B80D1BF1F3F335544A5D03A98D5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -3095,15 +3095,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Specify Prep Adder"
-        "ProductCode" = "8:{B751B0CF-F336-486E-9E55-DFFADF1994AB}"
-        "PackageCode" = "8:{288369E2-B52B-4BC0-AFF6-CA990B28F5D1}"
+        "ProductCode" = "8:{CE5246C5-F918-41A9-97E3-D871397A8DDA}"
+        "PackageCode" = "8:{DAA78630-2507-4304-8F9D-317E4C6C0284}"
         "UpgradeCode" = "8:{F48DC9F1-226D-4C71-9F4E-FE1BA2837D51}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.0.0"
+        "ProductVersion" = "8:2.0.1"
         "Manufacturer" = "8:Florida Museum of Natural History"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -3701,7 +3701,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FEC11D1D2EBD4267AC2B3E03ACAD8CD9"
             {
-            "SourcePath" = "8:..\\SpecifyPrepAdd\\obj\\Release\\SpecifyPrepAdd.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6C2899267C4B4AA4AE59C4C81E37D082"
