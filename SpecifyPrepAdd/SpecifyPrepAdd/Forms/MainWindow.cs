@@ -34,6 +34,7 @@ namespace SpecifyPrepAdd
         private string collectionName;
         private string databaseName;
         private string serverName;
+        private bool CatalogNumberNumeric;
 
         public MainWindow()
         {
@@ -55,6 +56,10 @@ namespace SpecifyPrepAdd
             toolStripStatusLabelCollection.Text = this.collectionName;
             toolStripStatusLabelUserName.Text = this.userName;
             string spversion = getSpecifyVersion();
+            if (isCatalogNumberNumeric(this.collectionID))
+                this.CatalogNumberNumeric = true;
+            else
+                this.CatalogNumberNumeric = false;
             if (spversion != Properties.Settings.Default.SpecifyVersion)
             {
                 MessageBox.Show(string.Format("WARNING: Specify version mismatch.  This application supports and has been tested with Specify version {0}.  Your version is {1}.  Use at your own risk.", Properties.Settings.Default.SpecifyVersion, spversion));
@@ -250,6 +255,30 @@ namespace SpecifyPrepAdd
             }
         }
 
+        private bool isCatalogNumberNumeric(int collectionID)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(this.connectionString))
+                {
+                    string sql = "select CatalogFormatNumName from collection where collectionID = @collectionID";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@collectionID", collectionID);
+                    conn.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        return result.ToString().Equals("CatalogNumberNumeric");
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return false;
+        }
+
         private int GetCollectionObjectID(string identifier)
         {
             try
@@ -258,10 +287,21 @@ namespace SpecifyPrepAdd
                 {
                     if (byCatNumButton.Checked)
                     {
-                        string catNumSQL = @"SELECT CollectionObjectID FROM collectionobject 
+                        string catNumSQL = String.Empty;
+                        if (this.CatalogNumberNumeric)
+                        {
+                            catNumSQL = @"SELECT CollectionObjectID FROM collectionobject 
                             INNER JOIN collection USING(CollectionID) 
                             WHERE collectionobject.CatalogNumber = LPAD(@CatNum, 9, '0')
                             AND collection.CollectionName = @CollName";
+                        }
+                        else
+                        {
+                            catNumSQL = @"SELECT CollectionObjectID FROM collectionobject 
+                            INNER JOIN collection USING(CollectionID) 
+                            WHERE collectionobject.CatalogNumber = @CatNum
+                            AND collection.CollectionName = @CollName";
+                        }                        
                         MySqlCommand cmd = new MySqlCommand(catNumSQL, conn);
                         cmd.Parameters.Add("@CatNum", MySqlDbType.String);
                         cmd.Parameters.Add("@CollName", MySqlDbType.String);
