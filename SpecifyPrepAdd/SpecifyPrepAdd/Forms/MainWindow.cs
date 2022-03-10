@@ -574,6 +574,7 @@ namespace SpecifyPrepAdd
             if (externalRadioButton.Checked)
             {
                 externalColumnBox.Visible = true;
+                lblHelpText1.Visible = true;
                 externalTableComboBox.DataSource = getExternalTables();
             }
             else

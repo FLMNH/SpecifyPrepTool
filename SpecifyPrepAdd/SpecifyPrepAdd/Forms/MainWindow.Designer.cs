@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.exportCSVDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readmeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,7 @@
             this.toolStripStatusLabelDatabase = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblHelpText1 = new System.Windows.Forms.Label();
             this.PrepTypeBox = new System.Windows.Forms.GroupBox();
             this.addPrepsButton = new System.Windows.Forms.Button();
             this.SelectedCSVTextBox = new System.Windows.Forms.TextBox();
@@ -68,7 +69,6 @@
             this.externalColumnLabel = new System.Windows.Forms.Label();
             this.externalColumnComboBox = new System.Windows.Forms.ComboBox();
             this.CSVDataGrid = new System.Windows.Forms.DataGridView();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -97,6 +97,13 @@
             this.menuStrip1.TabIndex = 29;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // HelpMenu
             // 
             this.HelpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -109,14 +116,14 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // readmeToolStripMenuItem
             // 
             this.readmeToolStripMenuItem.Name = "readmeToolStripMenuItem";
-            this.readmeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.readmeToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.readmeToolStripMenuItem.Text = "Readme";
             this.readmeToolStripMenuItem.Click += new System.EventHandler(this.HelpMenu_Click);
             // 
@@ -189,7 +196,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.lblHelpText1);
             this.splitContainer1.Panel1.Controls.Add(this.PrepTypeBox);
             this.splitContainer1.Panel1.Controls.Add(this.messageBoxLabel);
             this.splitContainer1.Panel1.Controls.Add(this.messageBox);
@@ -205,14 +212,16 @@
             this.splitContainer1.SplitterDistance = 355;
             this.splitContainer1.TabIndex = 31;
             // 
-            // label1
+            // lblHelpText1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(311, 190);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(293, 13);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "* External is for use the the Florida Museum CDN Middleware";
+            this.lblHelpText1.AutoSize = true;
+            this.lblHelpText1.Location = new System.Drawing.Point(564, 269);
+            this.lblHelpText1.Name = "lblHelpText1";
+            this.lblHelpText1.Size = new System.Drawing.Size(638, 13);
+            this.lblHelpText1.TabIndex = 34;
+            this.lblHelpText1.Text = "* CDN External is fo use with the Florida Museum CDN Middleware and corresponds t" +
+    "o the External checkbox on the preparation form.";
+            this.lblHelpText1.Visible = false;
             // 
             // PrepTypeBox
             // 
@@ -348,7 +357,7 @@
             this.actionBox.Controls.Add(this.prepsOnlyRadioButton);
             this.actionBox.Location = new System.Drawing.Point(24, 168);
             this.actionBox.Name = "actionBox";
-            this.actionBox.Size = new System.Drawing.Size(281, 41);
+            this.actionBox.Size = new System.Drawing.Size(308, 41);
             this.actionBox.TabIndex = 28;
             this.actionBox.TabStop = false;
             // 
@@ -357,9 +366,9 @@
             this.externalRadioButton.AutoSize = true;
             this.externalRadioButton.Location = new System.Drawing.Point(122, 18);
             this.externalRadioButton.Name = "externalRadioButton";
-            this.externalRadioButton.Size = new System.Drawing.Size(131, 17);
+            this.externalRadioButton.Size = new System.Drawing.Size(164, 17);
             this.externalRadioButton.TabIndex = 22;
-            this.externalRadioButton.Text = "Also Populate External";
+            this.externalRadioButton.Text = "Also Populate Additional Field";
             this.externalRadioButton.UseVisualStyleBackColor = true;
             this.externalRadioButton.CheckedChanged += new System.EventHandler(this.externalRadioButton_CheckedChanged_1);
             // 
@@ -397,9 +406,9 @@
             this.spreadsheetExternalLocationLabel.AutoSize = true;
             this.spreadsheetExternalLocationLabel.Location = new System.Drawing.Point(6, 64);
             this.spreadsheetExternalLocationLabel.Name = "spreadsheetExternalLocationLabel";
-            this.spreadsheetExternalLocationLabel.Size = new System.Drawing.Size(190, 13);
+            this.spreadsheetExternalLocationLabel.Size = new System.Drawing.Size(179, 13);
             this.spreadsheetExternalLocationLabel.TabIndex = 7;
-            this.spreadsheetExternalLocationLabel.Text = "Spreadsheet External Location Column";
+            this.spreadsheetExternalLocationLabel.Text = "Spreadsheet Additional Field Column";
             // 
             // spreadsheetExternalColumnComboBox
             // 
@@ -412,11 +421,11 @@
             // externalBoolLabel
             // 
             this.externalBoolLabel.AutoSize = true;
-            this.externalBoolLabel.Location = new System.Drawing.Point(379, 16);
+            this.externalBoolLabel.Location = new System.Drawing.Point(393, 16);
             this.externalBoolLabel.Name = "externalBoolLabel";
-            this.externalBoolLabel.Size = new System.Drawing.Size(107, 13);
+            this.externalBoolLabel.Size = new System.Drawing.Size(96, 13);
             this.externalBoolLabel.TabIndex = 5;
-            this.externalBoolLabel.Text = "External Bool Column";
+            this.externalBoolLabel.Text = "CDN External Field";
             // 
             // externalBoolComboBox
             // 
@@ -431,9 +440,9 @@
             this.externalTableLabel.AutoSize = true;
             this.externalTableLabel.Location = new System.Drawing.Point(9, 16);
             this.externalTableLabel.Name = "externalTableLabel";
-            this.externalTableLabel.Size = new System.Drawing.Size(75, 13);
+            this.externalTableLabel.Size = new System.Drawing.Size(108, 13);
             this.externalTableLabel.TabIndex = 3;
-            this.externalTableLabel.Text = "External Table";
+            this.externalTableLabel.Text = "Additional Field Table";
             // 
             // externalTableComboBox
             // 
@@ -449,9 +458,9 @@
             this.externalColumnLabel.AutoSize = true;
             this.externalColumnLabel.Location = new System.Drawing.Point(232, 16);
             this.externalColumnLabel.Name = "externalColumnLabel";
-            this.externalColumnLabel.Size = new System.Drawing.Size(127, 13);
+            this.externalColumnLabel.Size = new System.Drawing.Size(78, 13);
             this.externalColumnLabel.TabIndex = 1;
-            this.externalColumnLabel.Text = "External Location Column";
+            this.externalColumnLabel.Text = "Additional Field";
             // 
             // externalColumnComboBox
             // 
@@ -470,13 +479,6 @@
             this.CSVDataGrid.ReadOnly = true;
             this.CSVDataGrid.Size = new System.Drawing.Size(1223, 615);
             this.CSVDataGrid.TabIndex = 16;
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -557,7 +559,7 @@
         private System.Windows.Forms.Label externalColumnLabel;
         private System.Windows.Forms.ComboBox externalColumnComboBox;
         private System.Windows.Forms.DataGridView CSVDataGrid;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHelpText1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
