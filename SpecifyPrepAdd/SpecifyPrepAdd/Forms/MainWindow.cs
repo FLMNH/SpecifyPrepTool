@@ -206,7 +206,9 @@ namespace SpecifyPrepAdd
                     conn.Close();
                     var columns = (from DataRowView row in colls.DefaultView
                                    select row["COLUMN_NAME"].ToString());
-                    return columns.ToList();
+                    List<string> result = columns.ToList();
+                    result.Insert(0,"-- Select a Value --");
+                    return result;
                 }
             }
             catch (Exception exc)
@@ -218,6 +220,7 @@ namespace SpecifyPrepAdd
 
         private List<string> getExternalTables()
         {
+            /*
             try
             {
                 using (MySqlConnection conn = GetMySqlConnection())
@@ -235,6 +238,8 @@ namespace SpecifyPrepAdd
                 messageBox.AppendText(exc.ToString() + "\n");
                 return null;
             }
+            */
+            return new List<string>(){ "-- Select a Table --", "preparation", "preparationattribute"};
         }
 
         private List<string> getSpreadsheetExternalColumn()
@@ -364,15 +369,26 @@ namespace SpecifyPrepAdd
                     string table = externalTableComboBox.SelectedItem.ToString();
                     string locationColumn = externalColumnComboBox.SelectedItem.ToString();
                     string locationBoolColumn = externalBoolComboBox.SelectedItem.ToString();
-                    string sql = String.Format("UPDATE {0} SET {1} = @externalLocation, {2} = 1 WHERE preparationID = @prepID", table, locationColumn, locationBoolColumn);
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.Add("@externalLocation", MySqlDbType.String);
-                    cmd.Parameters.Add("@prepID", MySqlDbType.Int32);
-                    cmd.Parameters["@externalLocation"].Value = externalLocation;
-                    cmd.Parameters["@prepID"].Value = prepID;
-                    conn.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    conn.Close();
+                    if (locationColumn != "-- Select a Value --")
+                    {
+                        string sql;
+                        if (locationBoolColumn != "-- Select a Value --")
+                        {
+                            sql = String.Format("UPDATE {0} SET {1} = @externalLocation, {2} = 1 WHERE preparationID = @prepID", table, locationColumn, locationBoolColumn);
+                        }
+                        else
+                        {
+                            sql = String.Format("UPDATE {0} SET {1} = @externalLocation WHERE preparationID = @prepID", table, locationColumn);
+                        }
+                        MySqlCommand cmd = new MySqlCommand(sql, conn);
+                        cmd.Parameters.Add("@externalLocation", MySqlDbType.String);
+                        cmd.Parameters.Add("@prepID", MySqlDbType.Int32);
+                        cmd.Parameters["@externalLocation"].Value = externalLocation;
+                        cmd.Parameters["@prepID"].Value = prepID;
+                        conn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
                 }
             }
             catch (Exception exc)
