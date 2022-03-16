@@ -215,12 +215,13 @@
             // lblHelpText1
             // 
             this.lblHelpText1.AutoSize = true;
-            this.lblHelpText1.Location = new System.Drawing.Point(564, 269);
+            this.lblHelpText1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHelpText1.Location = new System.Drawing.Point(564, 232);
+            this.lblHelpText1.MaximumSize = new System.Drawing.Size(600, 500);
             this.lblHelpText1.Name = "lblHelpText1";
-            this.lblHelpText1.Size = new System.Drawing.Size(638, 13);
+            this.lblHelpText1.Size = new System.Drawing.Size(597, 48);
             this.lblHelpText1.TabIndex = 34;
-            this.lblHelpText1.Text = "* CDN External is fo use with the Florida Museum CDN Middleware and corresponds t" +
-    "o the External checkbox on the preparation form.";
+            this.lblHelpText1.Text = resources.GetString("lblHelpText1.Text");
             this.lblHelpText1.Visible = false;
             // 
             // PrepTypeBox
@@ -239,6 +240,7 @@
             // 
             // addPrepsButton
             // 
+            this.addPrepsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addPrepsButton.Location = new System.Drawing.Point(362, 66);
             this.addPrepsButton.Name = "addPrepsButton";
             this.addPrepsButton.Size = new System.Drawing.Size(144, 23);
@@ -257,6 +259,7 @@
             // 
             // SelectCSVButton
             // 
+            this.SelectCSVButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectCSVButton.Location = new System.Drawing.Point(362, 29);
             this.SelectCSVButton.Name = "SelectCSVButton";
             this.SelectCSVButton.Size = new System.Drawing.Size(144, 23);
@@ -268,18 +271,20 @@
             // CSVFileLabel
             // 
             this.CSVFileLabel.AutoSize = true;
-            this.CSVFileLabel.Location = new System.Drawing.Point(3, 16);
+            this.CSVFileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CSVFileLabel.Location = new System.Drawing.Point(6, 8);
             this.CSVFileLabel.Name = "CSVFileLabel";
-            this.CSVFileLabel.Size = new System.Drawing.Size(104, 13);
+            this.CSVFileLabel.Size = new System.Drawing.Size(133, 16);
             this.CSVFileLabel.TabIndex = 14;
             this.CSVFileLabel.Text = "Spreadsheet Upload";
             // 
             // PrepTypeLabel
             // 
             this.PrepTypeLabel.AutoSize = true;
+            this.PrepTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrepTypeLabel.Location = new System.Drawing.Point(6, 52);
             this.PrepTypeLabel.Name = "PrepTypeLabel";
-            this.PrepTypeLabel.Size = new System.Drawing.Size(56, 13);
+            this.PrepTypeLabel.Size = new System.Drawing.Size(71, 16);
             this.PrepTypeLabel.TabIndex = 10;
             this.PrepTypeLabel.Text = "Prep Type";
             // 
@@ -294,9 +299,10 @@
             // messageBoxLabel
             // 
             this.messageBoxLabel.AutoSize = true;
+            this.messageBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messageBoxLabel.Location = new System.Drawing.Point(622, 11);
             this.messageBoxLabel.Name = "messageBoxLabel";
-            this.messageBoxLabel.Size = new System.Drawing.Size(55, 13);
+            this.messageBoxLabel.Size = new System.Drawing.Size(71, 16);
             this.messageBoxLabel.TabIndex = 32;
             this.messageBoxLabel.Text = "Messages";
             // 
@@ -311,6 +317,7 @@
             // 
             // exportCSVButton
             // 
+            this.exportCSVButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exportCSVButton.Location = new System.Drawing.Point(350, 139);
             this.exportCSVButton.Name = "exportCSVButton";
             this.exportCSVButton.Size = new System.Drawing.Size(138, 23);
@@ -333,9 +340,10 @@
             // 
             this.byCatNumButton.AutoSize = true;
             this.byCatNumButton.Checked = true;
+            this.byCatNumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.byCatNumButton.Location = new System.Drawing.Point(6, 16);
             this.byCatNumButton.Name = "byCatNumButton";
-            this.byCatNumButton.Size = new System.Drawing.Size(116, 17);
+            this.byCatNumButton.Size = new System.Drawing.Size(142, 20);
             this.byCatNumButton.TabIndex = 22;
             this.byCatNumButton.TabStop = true;
             this.byCatNumButton.Text = "By Catalog Number";
@@ -344,9 +352,10 @@
             // byGUIDButton
             // 
             this.byGUIDButton.AutoSize = true;
-            this.byGUIDButton.Location = new System.Drawing.Point(128, 16);
+            this.byGUIDButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.byGUIDButton.Location = new System.Drawing.Point(170, 16);
             this.byGUIDButton.Name = "byGUIDButton";
-            this.byGUIDButton.Size = new System.Drawing.Size(67, 17);
+            this.byGUIDButton.Size = new System.Drawing.Size(77, 20);
             this.byGUIDButton.TabIndex = 21;
             this.byGUIDButton.Text = "By GUID";
             this.byGUIDButton.UseVisualStyleBackColor = true;
@@ -357,16 +366,17 @@
             this.actionBox.Controls.Add(this.prepsOnlyRadioButton);
             this.actionBox.Location = new System.Drawing.Point(24, 168);
             this.actionBox.Name = "actionBox";
-            this.actionBox.Size = new System.Drawing.Size(308, 41);
+            this.actionBox.Size = new System.Drawing.Size(383, 41);
             this.actionBox.TabIndex = 28;
             this.actionBox.TabStop = false;
             // 
             // externalRadioButton
             // 
             this.externalRadioButton.AutoSize = true;
-            this.externalRadioButton.Location = new System.Drawing.Point(122, 18);
+            this.externalRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.externalRadioButton.Location = new System.Drawing.Point(146, 15);
             this.externalRadioButton.Name = "externalRadioButton";
-            this.externalRadioButton.Size = new System.Drawing.Size(164, 17);
+            this.externalRadioButton.Size = new System.Drawing.Size(205, 20);
             this.externalRadioButton.TabIndex = 22;
             this.externalRadioButton.Text = "Also Populate Additional Field";
             this.externalRadioButton.UseVisualStyleBackColor = true;
@@ -376,9 +386,10 @@
             // 
             this.prepsOnlyRadioButton.AutoSize = true;
             this.prepsOnlyRadioButton.Checked = true;
-            this.prepsOnlyRadioButton.Location = new System.Drawing.Point(6, 18);
+            this.prepsOnlyRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prepsOnlyRadioButton.Location = new System.Drawing.Point(6, 15);
             this.prepsOnlyRadioButton.Name = "prepsOnlyRadioButton";
-            this.prepsOnlyRadioButton.Size = new System.Drawing.Size(110, 17);
+            this.prepsOnlyRadioButton.Size = new System.Drawing.Size(134, 20);
             this.prepsOnlyRadioButton.TabIndex = 21;
             this.prepsOnlyRadioButton.TabStop = true;
             this.prepsOnlyRadioButton.Text = "Create Preps Only";
@@ -404,9 +415,10 @@
             // spreadsheetExternalLocationLabel
             // 
             this.spreadsheetExternalLocationLabel.AutoSize = true;
+            this.spreadsheetExternalLocationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.spreadsheetExternalLocationLabel.Location = new System.Drawing.Point(6, 64);
             this.spreadsheetExternalLocationLabel.Name = "spreadsheetExternalLocationLabel";
-            this.spreadsheetExternalLocationLabel.Size = new System.Drawing.Size(179, 13);
+            this.spreadsheetExternalLocationLabel.Size = new System.Drawing.Size(229, 16);
             this.spreadsheetExternalLocationLabel.TabIndex = 7;
             this.spreadsheetExternalLocationLabel.Text = "Spreadsheet Additional Field Column";
             // 
@@ -421,9 +433,10 @@
             // externalBoolLabel
             // 
             this.externalBoolLabel.AutoSize = true;
-            this.externalBoolLabel.Location = new System.Drawing.Point(393, 16);
+            this.externalBoolLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.externalBoolLabel.Location = new System.Drawing.Point(383, 15);
             this.externalBoolLabel.Name = "externalBoolLabel";
-            this.externalBoolLabel.Size = new System.Drawing.Size(96, 13);
+            this.externalBoolLabel.Size = new System.Drawing.Size(120, 16);
             this.externalBoolLabel.TabIndex = 5;
             this.externalBoolLabel.Text = "CDN External Field";
             // 
@@ -438,9 +451,10 @@
             // externalTableLabel
             // 
             this.externalTableLabel.AutoSize = true;
+            this.externalTableLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.externalTableLabel.Location = new System.Drawing.Point(9, 16);
             this.externalTableLabel.Name = "externalTableLabel";
-            this.externalTableLabel.Size = new System.Drawing.Size(108, 13);
+            this.externalTableLabel.Size = new System.Drawing.Size(139, 16);
             this.externalTableLabel.TabIndex = 3;
             this.externalTableLabel.Text = "Additional Field Table";
             // 
@@ -456,9 +470,10 @@
             // externalColumnLabel
             // 
             this.externalColumnLabel.AutoSize = true;
+            this.externalColumnLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.externalColumnLabel.Location = new System.Drawing.Point(232, 16);
             this.externalColumnLabel.Name = "externalColumnLabel";
-            this.externalColumnLabel.Size = new System.Drawing.Size(78, 13);
+            this.externalColumnLabel.Size = new System.Drawing.Size(100, 16);
             this.externalColumnLabel.TabIndex = 1;
             this.externalColumnLabel.Text = "Additional Field";
             // 

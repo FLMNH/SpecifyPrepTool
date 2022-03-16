@@ -239,7 +239,7 @@ namespace SpecifyPrepAdd
                 return null;
             }
             */
-            return new List<string>(){ "-- Select a Table --", "preparation", "preparationattribute"};
+            return new List<string>(){ "-- Select a Table --", "preparation"};
         }
 
         private List<string> getSpreadsheetExternalColumn()
@@ -538,7 +538,9 @@ namespace SpecifyPrepAdd
 
         private void addPrepsButton_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             AddPreps();
+            Cursor = Cursors.Default;
         }
 
         private void exportCSVButton_Click(object sender, EventArgs e)
