@@ -184,11 +184,7 @@ namespace SpecifyPrepAdd
                 }
                 else if (userType.Equals("LimitedAccess"))
                 {
-                    bool auth = isLimitedUserWithPrepModify(conn, getSpPrincipalID(conn, getSpecifyUserID(conn, username, password), collectionName));
-                    if (!auth)
-                    {
-                        return auth;
-                    }
+                    return isLimitedUserWithPrepModify(conn, getSpPrincipalID(conn, getSpecifyUserID(conn, username, password), collectionName));
                 }
             }
             return false;
